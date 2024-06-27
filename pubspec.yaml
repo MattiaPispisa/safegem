@@ -1,0 +1,49 @@
+name: safegem
+description: A new Flutter project.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.2 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+
+  # routing
+  go_router: ^14.2.0
+
+  # style
+  cupertino_icons: ^1.0.2
+  avatar_glow:
+  flutter_animate:
+
+  # business logic
+  speech_to_text:
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
+  hydrated_bloc: ^9.1.5
+  path_provider: ^2.1.3
+
+  # di
+  get_it: ^7.7.0
+  injectable:
+
+  # ai
+  google_generative_ai: ^0.4.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  very_good_analysis: ^5.1.0
+
+  # code gen
+  injectable_generator:
+  build_runner:
+
+flutter:
+  uses-material-design: true
