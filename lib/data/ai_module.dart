@@ -9,9 +9,7 @@ abstract class GoogleGenerativeModule {
 
     final generationConfig = GenerationConfig();
 
-    final safetySettings = [
-      SafetySetting(HarmCategory.harassment, HarmBlockThreshold.high)
-    ];
+    List<SafetySetting> safetySettings = [];
 
     return GenerativeModel(
       model: 'gemini-1.5-flash-latest',
