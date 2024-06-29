@@ -12,22 +12,28 @@ class LocationHandler extends StatefulWidget {
 
   final Widget child;
 
+  static LocationHandlerState of(BuildContext context) {
+    return context.findAncestorStateOfType<LocationHandlerState>()!;
+  }
+
   @override
-  State<LocationHandler> createState() => _LocationHandlerState();
+  State<LocationHandler> createState() => LocationHandlerState();
 }
 
-class _LocationHandlerState extends State<LocationHandler> {
+class LocationHandlerState extends State<LocationHandler> {
   var _permissionGranted = false;
   StreamSubscription<Location>? _positionSubscription;
   Location? _lastKnownLocation;
 
+  Location? get lastKnowLocation => _lastKnownLocation;
+
   @override
   void initState() {
     super.initState();
-    _checkPermission();
+    _checkPermission().then((_) => _collectionLocation());
   }
 
-  void _checkPermission() async {
+  Future<void> _checkPermission() async {
     var permission = await g.Geolocator.checkPermission();
 
     if (permission == g.LocationPermission.denied) {
@@ -44,12 +50,11 @@ class _LocationHandlerState extends State<LocationHandler> {
     return;
   }
 
-  void _collectionLocation() {
+  g.LocationSettings _locationSettings() {
     final platform = Theme.of(context).platform;
-    late g.LocationSettings locationSettings;
 
     if (platform == TargetPlatform.android) {
-      locationSettings = g.AndroidSettings(
+      return g.AndroidSettings(
         accuracy: g.LocationAccuracy.high,
         distanceFilter: 100,
         forceLocationManager: true,
@@ -57,29 +62,40 @@ class _LocationHandlerState extends State<LocationHandler> {
       );
     } else if (platform == TargetPlatform.iOS ||
         platform == TargetPlatform.macOS) {
-      locationSettings = g.AppleSettings(
+      return g.AppleSettings(
         accuracy: g.LocationAccuracy.high,
         activityType: g.ActivityType.fitness,
         distanceFilter: 100,
         pauseLocationUpdatesAutomatically: true,
         showBackgroundLocationIndicator: false,
       );
-    } else {
-      locationSettings = g.LocationSettings(
-        accuracy: g.LocationAccuracy.high,
-        distanceFilter: 100,
-      );
     }
+
+    return g.LocationSettings(
+      accuracy: g.LocationAccuracy.high,
+      distanceFilter: 100,
+    );
+  }
+
+  Location _positionMap(g.Position position) {
+    return Location(
+      latitude: position.latitude,
+      longitude: position.longitude,
+    );
+  }
+
+  void _collectionLocation() {
+    if (!_permissionGranted) {
+      return;
+    }
+
+    final settings = _locationSettings();
+
     _positionSubscription?.cancel();
     _positionSubscription =
-        g.Geolocator.getPositionStream(locationSettings: locationSettings).map(
-      (position) {
-        return Location(
-          latitude: position.latitude,
-          longitude: position.longitude,
-        );
-      },
-    ).listen((location) => _lastKnownLocation = location);
+        g.Geolocator.getPositionStream(locationSettings: settings)
+            .map(_positionMap)
+            .listen((location) => _lastKnownLocation = location);
   }
 
   @override

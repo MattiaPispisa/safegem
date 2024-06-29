@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:safegem/presentation/ui/widget/controllers/location_permission.dart';
+import 'handler.dart';
 
 class Startup extends StatelessWidget {
   const Startup({
@@ -12,7 +12,9 @@ class Startup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LocationHandler(
-      child: child,
+      child: TelephonyPermissionHandler(
+        child: child,
+      ),
     );
   }
 }

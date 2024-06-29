@@ -6,7 +6,22 @@ import 'package:safegem/domain/model/model.dart';
 abstract class EmergencyService {
   const EmergencyService();
 
-  Future<Either<EmergencyMessageFailure, EmergencyMessage>>
-      getEmergencyMessage();
-  Future<Either<SendMessageFailure, Unit>> sendEmergencyMessage();
+  Future<Either<EmergencyMessageFailure, EmergencyMessage>> getEmergencyMessage(
+    GetEmergencyMessageDto dto,
+  );
+  Future<Either<SendMessageFailure, Unit>> sendEmergencyMessage(
+    EmergencyMessage message,
+  );
+}
+
+class GetEmergencyMessageDto {
+  const GetEmergencyMessageDto({
+    required this.location,
+    required this.message,
+    required this.senderContactInfo,
+  });
+
+  final Location location;
+  final UserMessage message;
+  final SenderContactInfo? senderContactInfo;
 }

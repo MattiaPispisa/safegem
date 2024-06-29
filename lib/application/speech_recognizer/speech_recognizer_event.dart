@@ -8,3 +8,5 @@ sealed class SpeechRecognizerEvent extends Equatable {
 }
 
 final class SpeechRecognizerStarted extends SpeechRecognizerEvent {}
+
+final class SpeechRecognizerEnd extends SpeechRecognizerEvent {}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
-import 'package:safegem/presentation/ui/widget/controllers/controllers.dart';
+import 'package:safegem/presentation/ui/widget/handler/handler.dart';
 import './ui/view/view.dart';
 
 @module
