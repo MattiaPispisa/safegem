@@ -31,5 +31,11 @@ class EmergencyComposerBloc
         senderContactInfo: event.senderContactInfo,
       ),
     );
+    emit(
+      state.copyWith(
+        composingMessage: false,
+        optionFailureOrMessageCreated: some(emergencyMessage),
+      ),
+    );
   }
 }

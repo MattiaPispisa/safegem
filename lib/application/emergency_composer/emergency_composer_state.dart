@@ -15,7 +15,8 @@ class EmergencyComposerState extends Equatable {
 
   EmergencyComposerState copyWith({
     bool? composingMessage,
-    Option<EmergencyMessageFailure>? optionFailureOrMessageCreated,
+    Option<Either<EmergencyMessageFailure, EmergencyMessage>>?
+        optionFailureOrMessageCreated,
   }) {
     return EmergencyComposerState(
       composingMessage: composingMessage ?? this.composingMessage,
@@ -24,7 +25,8 @@ class EmergencyComposerState extends Equatable {
   }
 
   final bool composingMessage;
-  final Option<EmergencyMessageFailure> optionFailureOrMessageCreated;
+  final Option<Either<EmergencyMessageFailure, EmergencyMessage>>
+      optionFailureOrMessageCreated;
 
   @override
   List<Object> get props => [

@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:injectable/injectable.dart';
 import 'package:safegem/domain/domain.dart';
+import 'package:telephony/telephony.dart';
 
 final RegExp phoneRegExp =
     RegExp(r'^(\+?\d{1,4}[\s-]?)?(\(?\d{3}\)?[\s-]?)?[\d\s-]{7,10}$');
@@ -80,8 +81,16 @@ class ImplEmergencyService extends EmergencyService {
 
   @override
   Future<Either<SendMessageFailure, Unit>> sendEmergencyMessage(
-      EmergencyMessage message) {
-    // TODO: implement sendEmergencyMessage
-    throw UnimplementedError();
+    EmergencyMessage message,
+  ) async {
+    try {
+      await Telephony.instance.sendSms(
+        to: message.authorityNumber,
+        message: message.message,
+      );
+      return right(unit);
+    } catch (e) {
+      return left(SendMessageNotSent(error: e.toString()));
+    }
   }
 }
