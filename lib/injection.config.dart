@@ -14,13 +14,16 @@ import 'package:google_generative_ai/google_generative_ai.dart' as _i5;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:speech_to_text/speech_to_text.dart' as _i3;
 
-import 'application/emergency_composer/emergency_composer_bloc.dart' as _i10;
-import 'application/speech_recognizer/speech_recognizer_bloc.dart' as _i9;
-import 'data/ai_module.dart' as _i12;
-import 'data/impl_emergency_message.dart' as _i8;
-import 'data/impl_speech_recognizer.dart' as _i7;
-import 'domain/domain.dart' as _i6;
-import 'presentation/routing.dart' as _i11;
+import 'application/emergency_composer/emergency_composer_bloc.dart' as _i11;
+import 'application/speech_recognizer/speech_recognizer_bloc.dart' as _i10;
+import 'data/ai_module.dart' as _i6;
+import 'data/impl_emergency_message.dart' as _i9;
+import 'data/impl_speech_recognizer.dart' as _i8;
+import 'domain/domain.dart' as _i7;
+import 'presentation/routing.dart' as _i12;
+
+const String _production = 'production';
+const String _develop = 'develop';
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -39,22 +42,30 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i3.SpeechToText>(() => speechToTextModule.getRecognizer());
     gh.factory<_i4.RouterConfig<Object>>(() => routerConfigModule.router);
     gh.singleton<_i5.GenerativeModel>(() => googleGenerativeModule.model);
-    await gh.lazySingletonAsync<_i6.SpeechRecognizerService>(
-      () => _i7.ImplSpeechRecognizerService.create(gh<_i3.SpeechToText>()),
+    gh.singleton<_i6.AI>(
+      () => _i6.GoogleAI(model: gh<_i5.GenerativeModel>()),
+      registerFor: {_production},
+    );
+    await gh.lazySingletonAsync<_i7.SpeechRecognizerService>(
+      () => _i8.ImplSpeechRecognizerService.create(gh<_i3.SpeechToText>()),
       preResolve: true,
     );
-    gh.lazySingleton<_i6.EmergencyService>(
-        () => _i8.ImplEmergencyService(gh<_i5.GenerativeModel>()));
-    gh.factory<_i9.SpeechRecognizerBloc>(
-        () => _i9.SpeechRecognizerBloc(gh<_i6.SpeechRecognizerService>()));
-    gh.factory<_i10.EmergencyComposerBloc>(
-        () => _i10.EmergencyComposerBloc(gh<_i6.EmergencyService>()));
+    gh.lazySingleton<_i7.EmergencyService>(
+        () => _i9.ImplEmergencyService(gh<_i5.GenerativeModel>()));
+    gh.factory<_i10.SpeechRecognizerBloc>(
+        () => _i10.SpeechRecognizerBloc(gh<_i7.SpeechRecognizerService>()));
+    gh.factory<_i11.EmergencyComposerBloc>(
+        () => _i11.EmergencyComposerBloc(gh<_i7.EmergencyService>()));
+    gh.singleton<_i6.AI>(
+      () => const _i6.MockAI(),
+      registerFor: {_develop},
+    );
     return this;
   }
 }
 
-class _$SpeechToTextModule extends _i7.SpeechToTextModule {}
+class _$SpeechToTextModule extends _i8.SpeechToTextModule {}
 
-class _$RouterConfigModule extends _i11.RouterConfigModule {}
+class _$RouterConfigModule extends _i12.RouterConfigModule {}
 
-class _$GoogleGenerativeModule extends _i12.GoogleGenerativeModule {}
+class _$GoogleGenerativeModule extends _i6.GoogleGenerativeModule {}

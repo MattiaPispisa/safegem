@@ -12,9 +12,7 @@ class Startup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LocationHandler(
-      child: TelephonyPermissionHandler(
-        child: child,
-      ),
+      child: child,
     );
   }
 }
