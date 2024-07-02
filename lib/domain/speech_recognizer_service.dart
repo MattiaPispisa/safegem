@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:equatable/equatable.dart';
 
 abstract class SpeechRecognizerService {
   Unit listen(void Function(SpeechRecognizerResult result) onResult);
@@ -6,7 +7,7 @@ abstract class SpeechRecognizerService {
   bool available();
 }
 
-class SpeechRecognizerResult {
+class SpeechRecognizerResult extends Equatable {
   const SpeechRecognizerResult({
     required this.recognizedWords,
     required this.finalResult,
@@ -14,4 +15,10 @@ class SpeechRecognizerResult {
 
   final String recognizedWords;
   final bool finalResult;
+
+  @override
+  List<Object?> get props => [
+        recognizedWords,
+        finalResult,
+      ];
 }

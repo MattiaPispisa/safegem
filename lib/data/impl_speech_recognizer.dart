@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:speech_to_text/speech_to_text.dart';
 
 import '../domain/domain.dart';
 
@@ -34,6 +35,9 @@ class ImplSpeechRecognizerService implements SpeechRecognizerService {
   @override
   Unit listen(void Function(SpeechRecognizerResult result) onResult) {
     _speechToText.listen(
+      listenMode: ListenMode.dictation,
+      pauseFor: const Duration(seconds: 4),
+      listenFor: const Duration(seconds: 60),
       onResult: (result) {
         onResult(
           SpeechRecognizerResult(

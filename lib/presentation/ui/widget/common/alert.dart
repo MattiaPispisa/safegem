@@ -2,15 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
 
 class Alert extends StatelessWidget {
-  const Alert({super.key});
+  const Alert({
+    super.key,
+    required this.child,
+  });
+
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = context.appTheme();
+
     return Container(
       decoration: BoxDecoration(
-        color: Colors.amber,
+        color: appTheme.colors.warning,
       ),
-      child: Text("aaa"),
+      child: child,
     );
   }
 }

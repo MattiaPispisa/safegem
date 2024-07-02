@@ -23,7 +23,13 @@ class EmergencyComposerBloc
     EmergencyMessageSent event,
     Emitter<EmergencyComposerState> emit,
   ) async {
-    emit(state.copyWith(composingMessage: true));
+    emit(
+      state.copyWith(
+        composingMessage: true,
+        userMessage: some(event.message),
+      ),
+    );
+
     final emergencyMessage = await _emergencyService.getEmergencyMessage(
       GetEmergencyMessageDto(
         location: event.location,
@@ -31,6 +37,7 @@ class EmergencyComposerBloc
         senderContactInfo: event.senderContactInfo,
       ),
     );
+
     emit(
       state.copyWith(
         composingMessage: false,

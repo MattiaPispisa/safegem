@@ -39,3 +39,25 @@ class EmergencyComposerConsumer extends StatelessWidget {
     );
   }
 }
+
+class EmergencyComposerSelector<T> extends StatelessWidget {
+  const EmergencyComposerSelector({
+    super.key,
+    required this.selector,
+    required this.builder,
+  });
+
+  final T Function(EmergencyComposerState state) selector;
+  final Widget Function(
+    BuildContext context,
+    T state,
+  ) builder;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<EmergencyComposerBloc, EmergencyComposerState, T>(
+      selector: selector,
+      builder: builder,
+    );
+  }
+}

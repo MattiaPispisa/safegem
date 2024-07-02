@@ -18,6 +18,8 @@ class SpeechRecognizerBloc
       : super(SpeechRecognizerState.initial()) {
     on<SpeechRecognizerStarted>(_onSpeechStarted);
     on<SpeechRecognizerEnd>(_onSpeechEnd);
+    on<SpeechRecognizerToggledSpeech>(_onToggleSpeech);
+    on<SpeechRecognizerRecognized>(_onRecognized);
   }
 
   final SpeechRecognizerService _speechRecognizerService;
@@ -30,30 +32,8 @@ class SpeechRecognizerBloc
       _speechRecognizerService.stop();
     }
     emit(state.copyWith(isListening: true));
-    _speechRecognizerService.listen((result) => onRecognition(result, emit));
-  }
-
-  void onRecognition(
-      SpeechRecognizerResult result, Emitter<SpeechRecognizerState> emit) {
-    if (isClosed || !state.isListening) {
-      return;
-    }
-
-    if (result.finalResult) {
-      emit(
-        state.copyWith(
-          recognizedWords: result.recognizedWords,
-          isListening: false,
-          optionOrMessageRecognized: some(
-            UserMessage(
-              message: result.recognizedWords,
-            ),
-          ),
-        ),
-      );
-    }
-
-    emit(state.copyWith(recognizedWords: result.recognizedWords));
+    _speechRecognizerService
+        .listen((result) => add(SpeechRecognizerRecognized(result: result)));
   }
 
   FutureOr<void> _onSpeechEnd(
@@ -61,12 +41,57 @@ class SpeechRecognizerBloc
     Emitter<SpeechRecognizerState> emit,
   ) {
     _speechRecognizerService.stop();
-    emit(state.copyWith(isListening: false));
+    emit(
+      state.copyWith(
+          isListening: false,
+          optionOrMessageRecognized: state.optionOrMessageRecognizedEnd),
+    );
   }
 
   @override
   Future<void> close() {
     _speechRecognizerService.stop();
     return super.close();
+  }
+
+  FutureOr<void> _onToggleSpeech(
+    SpeechRecognizerToggledSpeech event,
+    Emitter<SpeechRecognizerState> emit,
+  ) async {
+    if (state.isListening) {
+      return add(SpeechRecognizerEnd());
+    }
+
+    return add(SpeechRecognizerStarted());
+  }
+
+  FutureOr<void> _onRecognized(
+    SpeechRecognizerRecognized event,
+    Emitter<SpeechRecognizerState> emit,
+  ) async {
+    final result = event.result;
+
+    if (isClosed || !state.isListening) {
+      return;
+    }
+
+    if (!result.finalResult) {
+      return emit(state.copyWith(
+        recognizedWords: result.recognizedWords,
+        isListening: true,
+      ));
+    }
+
+    emit(
+      state.copyWith(
+        recognizedWords: result.recognizedWords,
+        isListening: false,
+        optionOrMessageRecognized: some(
+          UserMessage(
+            message: result.recognizedWords,
+          ),
+        ),
+      ),
+    );
   }
 }

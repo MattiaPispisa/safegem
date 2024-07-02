@@ -3,14 +3,16 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:injectable/injectable.dart';
 import 'package:safegem/domain/domain.dart';
 
-final RegExp phoneRegExp =
-    RegExp(r'^(\+?\d{1,4}[\s-]?)?(\(?\d{3}\)?[\s-]?)?[\d\s-]{7,10}$');
+import 'ai_module.dart';
+
+// phone reg exp inside text
+final RegExp phoneRegExp = RegExp(r'\+?(\d[\d-. ]{0,}\d)');
 
 @LazySingleton(as: EmergencyService)
 class ImplEmergencyService extends EmergencyService {
-  const ImplEmergencyService(this._model);
+  const ImplEmergencyService(this._ai);
 
-  final GenerativeModel _model;
+  final AI _ai;
 
   @override
   Future<Either<EmergencyMessageFailure, EmergencyMessage>> getEmergencyMessage(
@@ -61,7 +63,7 @@ class ImplEmergencyService extends EmergencyService {
         'Give me the phone number of the most appropriate authority '
         'in the following format: authority name: number.';
     final content = [Content.text(message)];
-    final response = await _model.generateContent(content);
+    final response = await _ai.generateContent(content);
     final match = phoneRegExp.firstMatch(response.text!);
     return match![0]!;
   }
@@ -74,7 +76,7 @@ class ImplEmergencyService extends EmergencyService {
         'latitude "${dto.location.latitude}" longitude "${dto.location.longitude}".'
         'This is happening: "${dto.message.message}".';
     final content = [Content.text(message)];
-    final response = await _model.generateContent(content);
+    final response = await _ai.generateContent(content);
     return response.text!;
   }
 

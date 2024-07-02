@@ -11,6 +11,6 @@ void bootstrap({
   HydratedBloc.storage =
       await HydratedStorage.build(storageDirectory: storageDirectory);
 
-  await configureDependencies(String.fromEnvironment('ENVIRONMENT'));
+  await configureDependencies(String.fromEnvironment('ENVIRONMENT',defaultValue: "develop"));
   runApp(then());
 }

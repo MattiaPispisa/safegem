@@ -17,8 +17,8 @@ import 'package:speech_to_text/speech_to_text.dart' as _i3;
 import 'application/emergency_composer/emergency_composer_bloc.dart' as _i11;
 import 'application/speech_recognizer/speech_recognizer_bloc.dart' as _i10;
 import 'data/ai_module.dart' as _i6;
-import 'data/impl_emergency_message.dart' as _i9;
-import 'data/impl_speech_recognizer.dart' as _i8;
+import 'data/impl_emergency_message.dart' as _i8;
+import 'data/impl_speech_recognizer.dart' as _i9;
 import 'domain/domain.dart' as _i7;
 import 'presentation/routing.dart' as _i12;
 
@@ -46,12 +46,12 @@ extension GetItInjectableX on _i1.GetIt {
       () => _i6.GoogleAI(model: gh<_i5.GenerativeModel>()),
       registerFor: {_production},
     );
+    gh.lazySingleton<_i7.EmergencyService>(
+        () => _i8.ImplEmergencyService(gh<_i6.AI>()));
     await gh.lazySingletonAsync<_i7.SpeechRecognizerService>(
-      () => _i8.ImplSpeechRecognizerService.create(gh<_i3.SpeechToText>()),
+      () => _i9.ImplSpeechRecognizerService.create(gh<_i3.SpeechToText>()),
       preResolve: true,
     );
-    gh.lazySingleton<_i7.EmergencyService>(
-        () => _i9.ImplEmergencyService(gh<_i5.GenerativeModel>()));
     gh.factory<_i10.SpeechRecognizerBloc>(
         () => _i10.SpeechRecognizerBloc(gh<_i7.SpeechRecognizerService>()));
     gh.factory<_i11.EmergencyComposerBloc>(
@@ -64,7 +64,7 @@ extension GetItInjectableX on _i1.GetIt {
   }
 }
 
-class _$SpeechToTextModule extends _i8.SpeechToTextModule {}
+class _$SpeechToTextModule extends _i9.SpeechToTextModule {}
 
 class _$RouterConfigModule extends _i12.RouterConfigModule {}
 

@@ -27,15 +27,64 @@ class SpeechRecognizerConsumer extends StatelessWidget {
     required this.listener,
   });
 
-  final Widget Function(BuildContext context, SpeechRecognizerState state)
-      builder;
-  final void Function(BuildContext, SpeechRecognizerState) listener;
+  final Widget Function(
+    BuildContext context,
+    SpeechRecognizerState state,
+  ) builder;
+  final void Function(
+    BuildContext context,
+    SpeechRecognizerState state,
+  ) listener;
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SpeechRecognizerBloc, SpeechRecognizerState>(
       builder: builder,
       listener: listener,
+    );
+  }
+}
+
+class SpeechRecognizerSelector<T> extends StatelessWidget {
+  const SpeechRecognizerSelector({
+    super.key,
+    required this.selector,
+    required this.builder,
+  });
+
+  final T Function(SpeechRecognizerState state) selector;
+  final Widget Function(
+    BuildContext context,
+    T state,
+  ) builder;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<SpeechRecognizerBloc, SpeechRecognizerState, T>(
+      selector: selector,
+      builder: builder,
+    );
+  }
+}
+
+class SpeechRecognizerListener extends StatelessWidget {
+  const SpeechRecognizerListener({
+    super.key,
+    required this.listener,
+    required this.child,
+  });
+
+  final void Function(
+    BuildContext context,
+    SpeechRecognizerState state,
+  ) listener;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<SpeechRecognizerBloc, SpeechRecognizerState>(
+      listener: listener,
+      child: child,
     );
   }
 }

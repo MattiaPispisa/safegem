@@ -27,7 +27,7 @@ class MockAI implements AI {
       Iterable<Content> prompt) async {
     return GenerateContentResponse(
       [
-        Candidate(Content.text("text"), null, null, null, null),
+        Candidate(Content.text("police:112"), null, null, null, null),
       ],
       null,
     );
