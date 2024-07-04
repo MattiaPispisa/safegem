@@ -15,12 +15,13 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:speech_to_text/speech_to_text.dart' as _i3;
 
 import 'application/emergency_composer/emergency_composer_bloc.dart' as _i11;
+import 'application/sender/sender_bloc.dart' as _i12;
 import 'application/speech_recognizer/speech_recognizer_bloc.dart' as _i10;
 import 'data/ai_module.dart' as _i6;
 import 'data/impl_emergency_message.dart' as _i8;
 import 'data/impl_speech_recognizer.dart' as _i9;
 import 'domain/domain.dart' as _i7;
-import 'presentation/routing.dart' as _i12;
+import 'presentation/routing.dart' as _i13;
 
 const String _production = 'production';
 const String _develop = 'develop';
@@ -56,6 +57,8 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i10.SpeechRecognizerBloc(gh<_i7.SpeechRecognizerService>()));
     gh.factory<_i11.EmergencyComposerBloc>(
         () => _i11.EmergencyComposerBloc(gh<_i7.EmergencyService>()));
+    gh.factory<_i12.SenderBloc>(
+        () => _i12.SenderBloc(gh<_i7.EmergencyService>()));
     gh.singleton<_i6.AI>(
       () => const _i6.MockAI(),
       registerFor: {_develop},
@@ -66,6 +69,6 @@ extension GetItInjectableX on _i1.GetIt {
 
 class _$SpeechToTextModule extends _i9.SpeechToTextModule {}
 
-class _$RouterConfigModule extends _i12.RouterConfigModule {}
+class _$RouterConfigModule extends _i13.RouterConfigModule {}
 
 class _$GoogleGenerativeModule extends _i6.GoogleGenerativeModule {}

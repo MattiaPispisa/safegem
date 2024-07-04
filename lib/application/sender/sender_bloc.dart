@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:safegem/application/sender/count_down.dart';
 
 import '../../domain/domain.dart';
@@ -11,6 +12,7 @@ import '../../domain/domain.dart';
 part 'sender_event.dart';
 part 'sender_state.dart';
 
+@injectable
 class SenderBloc extends Bloc<SenderEvent, SenderState> {
   SenderBloc(this._emergencyService) : super(SenderState.initial()) {
     on<SenderMessageSent>(_onMessageSent);
@@ -26,17 +28,17 @@ class SenderBloc extends Bloc<SenderEvent, SenderState> {
   ) async {
     _countDown?.cancel();
 
-    if (state.sending) {
-      return;
-    }
-    if (event.wait.isNegative) {
-      return;
-    }
-    if (event.wait.inSeconds == 0) {
-      return _onTimerEnd(event.emergencyMessage, emit);
-    }
+    emit(state.copyWith(emergencyMessage: some(event.emergencyMessage)));
 
-    _countDown = CountDown(
+    /* 
+    
+        final wait = event.wait.isNegative ? Duration(seconds: 0) : event.wait;
+
+    if (wait.inSeconds == 0) {
+      return _onTimerEnd(event.emergencyMessage, emit);
+    } 
+
+     _countDown = CountDown(
       duration: event.wait,
       onTick: (tick) {
         _safeEmit(() => emit(state.copyWith(timerBeforeSend: some(tick))));
@@ -46,7 +48,7 @@ class SenderBloc extends Bloc<SenderEvent, SenderState> {
         _onTimerEnd(event.emergencyMessage, emit);
       },
     );
-    return;
+    return; */
   }
 
   FutureOr<void> _onUndoSent(

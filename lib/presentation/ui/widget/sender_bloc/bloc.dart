@@ -38,3 +38,22 @@ class SenderConsumer extends StatelessWidget {
     );
   }
 }
+
+class SenderBuilder extends StatelessWidget {
+  const SenderBuilder({
+    super.key,
+    required this.builder,
+  });
+
+  final Widget Function(
+    BuildContext context,
+    SenderState state,
+  ) builder;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SenderBloc, SenderState>(
+      builder: builder,
+    );
+  }
+}

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:injectable/injectable.dart';
 
@@ -25,12 +27,23 @@ class MockAI implements AI {
   @override
   Future<GenerateContentResponse> generateContent(
       Iterable<Content> prompt) async {
+    await Future<void>.delayed(Duration(seconds: 1));
     return GenerateContentResponse(
       [
-        Candidate(Content.text("police:112"), null, null, null, null),
+        Candidate(Content.text("police:112 ${_generateRandomString(5000)}"), null,
+            null, null, null),
       ],
       null,
     );
+  }
+
+  String _generateRandomString(int length) {
+    const String chars =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    final Random random = Random();
+
+    return List.generate(length, (index) => chars[random.nextInt(chars.length)])
+        .join();
   }
 }
 

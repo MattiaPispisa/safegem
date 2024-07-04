@@ -50,7 +50,17 @@ class ImplEmergencyService extends EmergencyService {
     }
 
     return right(
-      EmergencyMessage(authorityNumber: number, message: localizedMessage),
+      EmergencyMessage(
+        authorityNumber: number,
+        message: localizedMessage,
+        sms: Uri(
+          scheme: 'sms',
+          path: number,
+          queryParameters: {
+            'body': localizedMessage,
+          },
+        ),
+      ),
     );
   }
 
