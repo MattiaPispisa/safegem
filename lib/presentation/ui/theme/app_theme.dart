@@ -15,6 +15,13 @@ class AppTheme extends ThemeExtension<AppTheme> {
     );
   }
 
+  factory AppTheme.dark() {
+    return AppTheme(
+      colors: AppColors.dark(),
+      spacing: AppSpacing(),
+    );
+  }
+
   final AppColors colors;
   final AppSpacing spacing;
 

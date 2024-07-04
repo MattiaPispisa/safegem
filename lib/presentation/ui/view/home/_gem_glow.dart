@@ -6,9 +6,9 @@ import 'package:safegem/application/application.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
 import '../../widget/widget.dart';
 
-// TODO: togliere costanti
-
 class BlocGemGlow extends StatelessWidget {
+  const BlocGemGlow();
+
   void _onTap(BuildContext context) {
     context.read<SpeechRecognizerBloc>().add(SpeechRecognizerToggledSpeech());
   }
@@ -48,22 +48,30 @@ class GemGlow extends StatelessWidget {
       animate: animated,
       glowRadiusFactor: 0.6,
       curve: Curves.fastOutSlowIn,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(60),
-        onTap: onTap,
-        child: Ink(
-          height: 120,
-          width: 120,
-          decoration: BoxDecoration(
-            color: theme.primaryColor,
-            shape: BoxShape.circle,
-          ),
-          child: Center(
-            child: FaIcon(
-              FontAwesomeIcons.gem,
-              size: 40,
-              color: Colors.white,
-            ),
+      child: _gem(context),
+    );
+  }
+
+  Widget _gem(BuildContext context) {
+    final theme = context.theme();
+    final size = MediaQuery.sizeOf(context);
+    final sizeSize = size.width / 3;
+
+    return InkWell(
+      borderRadius: BorderRadius.circular(sizeSize / 2),
+      onTap: onTap,
+      child: Ink(
+        height: sizeSize,
+        width: sizeSize,
+        decoration: BoxDecoration(
+          color: theme.primaryColor,
+          shape: BoxShape.circle,
+        ),
+        child: Center(
+          child: Icon(
+            FontAwesomeIcons.gem,
+            size: sizeSize / 3,
+            color: theme.app.colors.neutral.shade50,
           ),
         ),
       ),

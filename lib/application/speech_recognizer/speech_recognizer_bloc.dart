@@ -40,12 +40,13 @@ class SpeechRecognizerBloc
     SpeechRecognizerEnd event,
     Emitter<SpeechRecognizerState> emit,
   ) {
-    _speechRecognizerService.stop();
     emit(
       state.copyWith(
-          isListening: false,
-          optionOrMessageRecognized: state.optionOrMessageRecognizedEnd),
+        isListening: false,
+      ),
     );
+    _speechRecognizerService.stop();
+    
   }
 
   @override
@@ -71,9 +72,7 @@ class SpeechRecognizerBloc
   ) async {
     final result = event.result;
 
-    if (isClosed || !state.isListening) {
-      return;
-    }
+   
 
     if (!result.finalResult) {
       return emit(state.copyWith(

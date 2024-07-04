@@ -91,6 +91,11 @@ abstract class AppLocalizations {
     Locale('en')
   ];
 
+  /// No description provided for @to.
+  ///
+  /// In en, this message translates to:
+  /// **'to'**
+  String get to;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -12,6 +12,12 @@ extension BuildContextHelper on BuildContext {
   }
 
   AppTheme appTheme() {
-    return Theme.of(this).extension<AppTheme>()!;
+    return Theme.of(this).app;
+  }
+}
+
+extension ThemeDataHelper on ThemeData {
+  AppTheme get app {
+    return extension<AppTheme>()!;
   }
 }

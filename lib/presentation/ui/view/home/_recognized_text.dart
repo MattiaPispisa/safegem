@@ -1,30 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:safegem/presentation/ui/extension/extension.dart';
 import 'package:safegem/presentation/ui/widget/widget.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class RecognizedText extends StatelessWidget {
-  const RecognizedText({super.key});
+class BlocRecognizedText extends StatelessWidget {
+  const BlocRecognizedText({super.key});
 
   @override
   Widget build(BuildContext context) {
     return EmergencyComposerSelector(
       selector: (state) => state.composingMessage,
-      builder: (_, composingMessage) {
-        return SpeechRecognizerSelector(
-          selector: (state) => state.recognizedWords,
-          builder: (__, recognizedWords) {
-            if (composingMessage) {
-              return _ComposingRecognizedWords(
-                  recognizedWords: recognizedWords);
-            }
-
-            return _TextUnderRecognition(
-              recognizedWords: recognizedWords,
+      builder: (context, composingMessage) {
+        return SpeechRecognizerBuilder(
+          builder: (context, state) {
+            return RecognizedText(
+              composingMessage: composingMessage,
+              listening: state.isListening,
+              recognizedWords: state.recognizedWords,
             );
           },
         );
       },
     );
+  }
+}
+
+class RecognizedText extends StatelessWidget {
+  const RecognizedText({
+    super.key,
+    required this.composingMessage,
+    required this.listening,
+    required this.recognizedWords,
+  });
+
+  final bool composingMessage;
+  final bool listening;
+  final String recognizedWords;
+
+  @override
+  Widget build(BuildContext context) {
+    if (composingMessage) {
+      return _ComposingRecognizedWords(recognizedWords: recognizedWords);
+    }
+
+    if (listening) {
+      return _TextUnderRecognition(
+        recognizedWords: recognizedWords,
+      );
+    }
+
+    return _UserText(recognizedWords);
   }
 }
 
@@ -40,7 +65,10 @@ class _ComposingRecognizedWords extends StatelessWidget {
   Widget build(BuildContext context) {
     return _UserText(recognizedWords)
         .animate(onPlay: (controller) => controller.repeat())
-        .shimmer(duration: 1200.ms, color: Colors.grey)
+        .shimmer(
+          duration: 1200.ms,
+          color: context.appTheme().colors.neutral.shade200,
+        )
         .animate();
   }
 }
@@ -80,6 +108,7 @@ class _UserText extends StatelessWidget {
       child: Text(
         text,
         textAlign: TextAlign.center,
+        style: context.theme().textTheme.headlineSmall,
       ),
     );
   }

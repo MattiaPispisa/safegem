@@ -6,6 +6,7 @@ import './ui/view/view.dart';
 
 @module
 abstract class RouterConfigModule {
+  @lazySingleton
   RouterConfig<Object> get router {
     return GoRouter(
       routes: [
@@ -21,6 +22,15 @@ abstract class RouterConfigModule {
               builder: (BuildContext context, GoRouterState state) {
                 return const HomeView();
               },
+              routes: [
+                GoRoute(
+                  path: 'settings',
+                  builder: (BuildContext context, GoRouterState state) {
+                    return const SettingsView();
+                  },
+                  routes: [],
+                ),
+              ],
             ),
           ],
         ),
