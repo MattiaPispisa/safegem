@@ -11,38 +11,90 @@ class SettingsView extends StatelessWidget {
     context.read<UserSettingsCubit>().setColor(color);
   }
 
+  void _toggleDarkMode(BuildContext context) {
+    context.read<UserSettingsCubit>().toggleDarkMode();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = context.theme();
+    final space = SizedBox(
+      height: context.appTheme().spacing.between,
+    );
     return BlocBuilder<UserSettingsCubit, UserSettingsState>(
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            iconTheme: theme.iconTheme.copyWith(
-              color: theme.app.colors.neutral.shade900,
-            ),
-            forceMaterialTransparency: true,
+            title: Text(context.t().settings),
           ),
           body: Padding(
             padding: EdgeInsets.all(theme.app.spacing.l),
-            child: Column(
-              children: [
-                Wrap(
-                  direction: Axis.horizontal,
-                  spacing: theme.app.spacing.l,
-                  children: state.availableColors.map((color) {
-                    return SelectableColor(
-                      color: state.colorOf(color),
-                      selected: color == state.selectedColor,
-                      onTap: () => _setPrimaryColor(context, color),
-                    );
-                  }).toList(),
-                )
-              ],
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _sectionTitle(context, text: context.t().theme),
+                  space,
+                  _color(context, state: state),
+                  space,
+                  space,
+                  _sectionTitle(context, text: context.t().brightness),
+                  space,
+                  _brightness(context, state: state),
+                ],
+              ),
             ),
           ),
         );
       },
+    );
+  }
+
+  Widget _color(
+    BuildContext context, {
+    required UserSettingsState state,
+  }) {
+    final theme = context.theme();
+
+    return Wrap(
+      direction: Axis.horizontal,
+      spacing: theme.app.spacing.l,
+      children: state.availableColors.map((color) {
+        return SelectableColor(
+          color: state.colorOf(color),
+          selected: color == state.selectedColor,
+          onTap: () => _setPrimaryColor(context, color),
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _brightness(
+    BuildContext context, {
+    required UserSettingsState state,
+  }) {
+    return Row(
+      children: [
+        Text(state.darkMode ? context.t().dark : context.t().light),
+        Switch(
+          value: state.darkMode,
+          onChanged: (_) => _toggleDarkMode(context),
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        ),
+      ],
+    );
+  }
+
+  Widget _sectionTitle(
+    BuildContext context, {
+    required String text,
+  }) {
+    final theme = context.theme();
+
+    return Text(
+      text,
+      style: theme.textTheme.headlineSmall,
     );
   }
 }

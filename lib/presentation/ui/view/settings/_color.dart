@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
 
+import '../../widget/widget.dart';
+
 class SelectableColor extends StatelessWidget {
   const SelectableColor({
     super.key,
@@ -15,7 +17,7 @@ class SelectableColor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return AppGestureDetector(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(

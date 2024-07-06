@@ -15,27 +15,64 @@ class UserTheme extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocSelector<UserSettingsCubit, UserSettingsState, ThemeData>(
       selector: (state) {
-        final iconTheme = IconThemeData(
-          size: 20,
-        );
         if (state.darkMode) {
-          return ThemeData.dark(useMaterial3: false).copyWith(
-            iconTheme: iconTheme,
-            primaryColor: state.materialColor,
-            extensions: [
-              AppTheme.dark(),
-            ],
-          );
+          return _darkTheme(state);
         }
-        return ThemeData.light(useMaterial3: false).copyWith(
-          iconTheme: iconTheme,
-          primaryColor: state.materialColor,
-          extensions: [
-            AppTheme.light(),
-          ],
-        );
+        return _lightTheme(state);
       },
       builder: builder,
+    );
+  }
+
+  ThemeData _lightTheme(UserSettingsState state) {
+    return _custom(
+      ThemeData.light(useMaterial3: false),
+      AppTheme.light(),
+      state,
+    );
+  }
+
+  ThemeData _darkTheme(UserSettingsState state) {
+    return _custom(
+      ThemeData.dark(useMaterial3: false),
+      AppTheme.dark(),
+      state,
+    );
+  }
+
+  ThemeData _custom(
+    ThemeData theme,
+    AppTheme appTheme,
+    UserSettingsState state,
+  ) {
+    final iconTheme = IconThemeData(
+      size: 20,
+    );
+    final textTheme = theme.textTheme.copyWith(
+      titleMedium: theme.textTheme.titleLarge?.copyWith(
+        fontSize: 20,
+      ),
+      titleSmall: theme.textTheme.titleLarge?.copyWith(
+        fontSize: 18,
+      ),
+    );
+
+    return theme.copyWith(
+      scaffoldBackgroundColor: appTheme.colors.neutral.shade50,
+      textTheme: textTheme,
+      appBarTheme: AppBarTheme(
+        iconTheme: theme.iconTheme.copyWith(
+          color: appTheme.colors.neutral.shade900,
+        ),
+        titleTextStyle: textTheme.titleMedium,
+        backgroundColor: appTheme.colors.neutral.shade50,
+        elevation: 0,
+      ),
+      iconTheme: iconTheme,
+      primaryColor: state.materialColor,
+      extensions: [
+        appTheme,
+      ],
     );
   }
 }

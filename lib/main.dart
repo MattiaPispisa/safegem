@@ -4,8 +4,6 @@ import 'package:safegem/application/application.dart';
 import 'package:safegem/bootstrap.dart';
 import 'package:safegem/injection.dart';
 import 'package:safegem/l10n/app_localizations.dart';
-import 'package:safegem/presentation/ui/theme/app_theme.dart';
-
 import 'presentation/ui/widget/widget.dart';
 
 void main() {

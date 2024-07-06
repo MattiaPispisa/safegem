@@ -15,8 +15,7 @@ class BlocGemGlow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SpeechRecognizerSelector(
-      selector: (state) => state.isListening,
+    return SpeechRecognizerIsListening(
       builder: (_, isListening) {
         return GemGlow(
           animated: isListening,
@@ -71,7 +70,7 @@ class GemGlow extends StatelessWidget {
           child: Icon(
             FontAwesomeIcons.gem,
             size: sizeSize / 3,
-            color: theme.app.colors.neutral.shade50,
+            color: context.theme().colorScheme.onPrimary,
           ),
         ),
       ),

@@ -86,6 +86,26 @@ class SpeechRecognizerSelector<T> extends StatelessWidget {
   }
 }
 
+class SpeechRecognizerIsListening extends StatelessWidget {
+  const SpeechRecognizerIsListening({
+    super.key,
+    required this.builder,
+  });
+
+  final Widget Function(
+    BuildContext context,
+    bool isListening,
+  ) builder;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<SpeechRecognizerBloc, SpeechRecognizerState, bool>(
+      selector: (state) => state.isListening,
+      builder: builder,
+    );
+  }
+}
+
 class SpeechRecognizerListener extends StatelessWidget {
   const SpeechRecognizerListener({
     super.key,

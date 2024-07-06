@@ -14,7 +14,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     final theme = context.appTheme();
 
     return HomeProviders(
@@ -39,10 +38,7 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
                 ),
-                ConstrainedBox(
-                  constraints: BoxConstraints(maxHeight: size.height / 2),
-                  child: BlocSender(),
-                )
+                BlocSender()
               ],
             ),
           ),

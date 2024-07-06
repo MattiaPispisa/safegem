@@ -30,7 +30,7 @@ class MockAI implements AI {
     await Future<void>.delayed(Duration(seconds: 1));
     return GenerateContentResponse(
       [
-        Candidate(Content.text("police:112 ${_generateRandomString(5000)}"), null,
+        Candidate(Content.text("police:112 ${_generateRandomString(20)}"), null,
             null, null, null),
       ],
       null,

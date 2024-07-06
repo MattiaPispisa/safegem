@@ -1,4 +1,9 @@
 {
   "@@locale": "en",
-  "to": "to"
+  "to": "to",
+  "settings": "Settings",
+  "theme": "Theme",
+  "dark": "Dark",
+  "light": "Light",
+  "brightness": "Brightness"
 }

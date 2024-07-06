@@ -11,16 +11,25 @@ class BlocSender extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SenderBuilder(
-      builder: (context, state) {
-        return state.emergencyMessage.fold(
-          () {
-            return SizedBox();
-          },
-          (emergencyMessage) {
-            return Sender(
-              emergencyMessage: emergencyMessage,
-            ).animate().slideY(begin: 1, end: 0);
+    const nothing = SizedBox();
+    return SpeechRecognizerIsListening(
+      builder: (context, isListening) {
+        if (isListening) {
+          return nothing;
+        }
+
+        return SenderBuilder(
+          builder: (context, state) {
+            return state.emergencyMessage.fold(
+              () {
+                return nothing;
+              },
+              (emergencyMessage) {
+                return Sender(
+                  emergencyMessage: emergencyMessage,
+                ).animate().slideY(begin: 1, end: 0);
+              },
+            );
           },
         );
       },
@@ -37,14 +46,13 @@ class Sender extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final iconSize = context.theme().iconTheme.size;
     final theme = context.appTheme();
 
     return _SenderContainer(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(width: iconSize),
           SizedBox(width: theme.spacing.m),
           Expanded(
             child: _SenderMessage(emergencyMessage: emergencyMessage),
@@ -96,26 +104,34 @@ class _SenderMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.appTheme();
+    final size = MediaQuery.sizeOf(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
       children: [
         _number(context),
         SizedBox(height: theme.spacing.m),
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(
-              color: theme.colors.neutral.shade50,
-              borderRadius: BorderRadius.circular(theme.spacing.m),
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: theme.spacing.m),
+        Container(
+          decoration: BoxDecoration(
+            color: theme.colors.neutral.shade50,
+            borderRadius: BorderRadius.circular(theme.spacing.m),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: theme.spacing.m),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: size.height / 3),
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(
+                  // mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: theme.spacing.m),
-                    Text(emergencyMessage.message),
+                    Text(
+                      emergencyMessage.message,
+                      textAlign: TextAlign.start,
+                    ),
                     SizedBox(height: theme.spacing.m),
                   ],
                 ),
@@ -178,7 +194,7 @@ class _SenderButton extends StatelessWidget {
         visualDensity: VisualDensity.compact,
         icon: Icon(
           Icons.send,
-          color: theme.app.colors.neutral.shade50,
+          color: context.theme().colorScheme.onPrimary,
         ),
         onPressed: _onPressed,
       ),

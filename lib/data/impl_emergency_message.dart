@@ -6,7 +6,7 @@ import 'package:safegem/domain/domain.dart';
 import 'ai_module.dart';
 
 // phone reg exp inside text
-final RegExp phoneRegExp = RegExp(r'\+?(\d[\d-. ]{0,}\d)');
+final RegExp phoneRegExp = RegExp(r'\+?\d[\d-. ]*(?:\d)');
 
 @LazySingleton(as: EmergencyService)
 class ImplEmergencyService extends EmergencyService {
