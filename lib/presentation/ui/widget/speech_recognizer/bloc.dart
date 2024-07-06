@@ -110,6 +110,7 @@ class SpeechRecognizerListener extends StatelessWidget {
   const SpeechRecognizerListener({
     super.key,
     required this.listener,
+    this.listenWhen,
     required this.child,
   });
 
@@ -117,12 +118,41 @@ class SpeechRecognizerListener extends StatelessWidget {
     BuildContext context,
     SpeechRecognizerState state,
   ) listener;
+  final bool Function(
+    SpeechRecognizerState previous,
+    SpeechRecognizerState current,
+  )? listenWhen;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<SpeechRecognizerBloc, SpeechRecognizerState>(
+      listenWhen: listenWhen,
       listener: listener,
+      child: child,
+    );
+  }
+}
+
+class SpeechRecognizerOnStartListening extends StatelessWidget {
+  const SpeechRecognizerOnStartListening({
+    super.key,
+    required this.onListening,
+    required this.child,
+  });
+
+  final void Function() onListening;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return SpeechRecognizerListener(
+      listener: (context, state) {
+        onListening();
+      },
+      listenWhen: (previous, current) {
+        return !previous.isListening && current.isListening;
+      },
       child: child,
     );
   }

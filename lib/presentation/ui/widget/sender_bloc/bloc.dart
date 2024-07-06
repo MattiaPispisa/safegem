@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:safegem/application/application.dart';
+import 'package:safegem/domain/domain.dart';
 import 'package:safegem/injection.dart';
 
 class SenderBlocProvider extends StatelessWidget {
@@ -54,6 +55,32 @@ class SenderBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SenderBloc, SenderState>(
       builder: builder,
+    );
+  }
+}
+
+class SenderOnNewMessage extends StatelessWidget {
+  const SenderOnNewMessage({
+    super.key,
+    required this.onMessage,
+    required this.child,
+  });
+
+  final void Function(EmergencyMessage message) onMessage;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<SenderBloc, SenderState>(
+      listener: (context, state) {
+        state.emergencyMessage.fold(() {}, (message) {
+          onMessage(message);
+        });
+      },
+      listenWhen: (previous, current) {
+        return previous.emergencyMessage != current.emergencyMessage;
+      },
+      child: child,
     );
   }
 }

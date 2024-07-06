@@ -6,19 +6,34 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../widget/widget.dart';
 
-class BlocSender extends StatelessWidget {
+class BlocSender extends StatefulWidget {
   const BlocSender({super.key});
+
+  @override
+  State<BlocSender> createState() => _BlocSenderState();
+}
+
+class _BlocSenderState extends State<BlocSender>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     const nothing = SizedBox();
-    return SpeechRecognizerIsListening(
-      builder: (context, isListening) {
-        if (isListening) {
-          return nothing;
-        }
-
-        return SenderBuilder(
+    return SpeechRecognizerOnStartListening(
+      onListening: () => controller.reverse(),
+      child: SenderOnNewMessage(
+        onMessage: (_) => controller.forward(),
+        child: SenderBuilder(
           builder: (context, state) {
             return state.emergencyMessage.fold(
               () {
@@ -27,12 +42,12 @@ class BlocSender extends StatelessWidget {
               (emergencyMessage) {
                 return Sender(
                   emergencyMessage: emergencyMessage,
-                ).animate().slideY(begin: 1, end: 0);
+                ).animate(controller: controller).slideY(begin: 1, end: 0);
               },
             );
           },
-        );
-      },
+        ),
+      ),
     );
   }
 }
