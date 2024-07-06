@@ -18,6 +18,10 @@ final class UserSettingsState extends Equatable {
     );
   }
 
+  @JsonKey(
+    fromJson: _colorsFromJson,
+    toJson: _colorsToJson,
+  )
   final List<AppColor> availableColors;
   final AppColor selectedColor;
   final bool darkMode;
@@ -57,11 +61,16 @@ final class UserSettingsState extends Equatable {
       ];
 }
 
+List<AppColor> _colorsFromJson(json) => AppColor.values;
+Object? _colorsToJson(state) => null;
+
 enum AppColor {
   @JsonValue('blue')
   blue('blue'),
   @JsonValue('violet')
-  violet('violet');
+  violet('violet'),
+  @JsonValue('green')
+  green('green');
 
   const AppColor(this.name);
 
@@ -87,6 +96,42 @@ enum AppColor {
         return Colors.purple;
       case (AppColor.violet, true):
         return Colors.deepPurple;
+      case (AppColor.green, false):
+        return _green;
+      case (AppColor.green, true):
+        return _darkGreen;
     }
   }
 }
+
+final _green = MaterialColor(
+  0xFF4CAF50,
+  <int, Color>{
+    50: Color(0xFFE8F5E9),
+    100: Color(0xFFC8E6C9),
+    200: Color(0xFFA5D6A7),
+    300: Color(0xFF81C784),
+    400: Color(0xFF66BB6A),
+    500: Color(0xFF4CAF50),
+    600: Color(0xFF43A047),
+    700: Color(0xFF388E3C),
+    800: Color(0xFF2E7D32),
+    900: Color(0xFF1B5E20),
+  },
+);
+
+final _darkGreen = MaterialColor(
+  0xFF388E3C,
+  <int, Color>{
+    50: Color(0xFF6D9B86),
+    100: Color(0xFF5F957C),
+    200: Color(0xFF508E71),
+    300: Color(0xFF428765),
+    400: Color(0xFF3B7E5D),
+    500: Color(0xFF388E3C),
+    600: Color(0xFF337E36),
+    700: Color(0xFF2D6F30),
+    800: Color(0xFF276125),
+    900: Color(0xFF1B4A1D),
+  },
+);

@@ -10,9 +10,7 @@ UserSettingsState _$UserSettingsStateFromJson(Map<String, dynamic> json) =>
     UserSettingsState(
       selectedColor: $enumDecode(_$AppColorEnumMap, json['selectedColor']),
       darkMode: json['darkMode'] as bool,
-      availableColors: (json['availableColors'] as List<dynamic>)
-          .map((e) => $enumDecode(_$AppColorEnumMap, e))
-          .toList(),
+      availableColors: _colorsFromJson(json['availableColors']),
       emergencyContacts: (json['emergencyContacts'] as List<dynamic>)
           .map((e) => EmergencyContact.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -20,8 +18,7 @@ UserSettingsState _$UserSettingsStateFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$UserSettingsStateToJson(UserSettingsState instance) =>
     <String, dynamic>{
-      'availableColors':
-          instance.availableColors.map((e) => _$AppColorEnumMap[e]!).toList(),
+      'availableColors': _colorsToJson(instance.availableColors),
       'selectedColor': _$AppColorEnumMap[instance.selectedColor]!,
       'darkMode': instance.darkMode,
       'emergencyContacts':
@@ -31,4 +28,5 @@ Map<String, dynamic> _$UserSettingsStateToJson(UserSettingsState instance) =>
 const _$AppColorEnumMap = {
   AppColor.blue: 'blue',
   AppColor.violet: 'violet',
+  AppColor.green: 'green',
 };
