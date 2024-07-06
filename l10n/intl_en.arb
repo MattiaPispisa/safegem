@@ -5,5 +5,10 @@
   "theme": "Theme",
   "dark": "Dark",
   "light": "Light",
-  "brightness": "Brightness"
+  "brightness": "Brightness",
+  "emergencyContacts": "Emergency Contacts",
+  "noConnectivity": "Sorry, you are offline. Please check your connection.",
+  "authorityNumberNotFound": "Sorry, I couldn't find the contact number for the local authorities.",
+  "messageNotRecognized": "Sorry, I couldn't understand the message",
+  "locationNotFound": "Sorry, I can't seem to determine your location."
 }

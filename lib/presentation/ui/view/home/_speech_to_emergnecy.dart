@@ -10,16 +10,20 @@ class SpeechToRecognizer extends StatelessWidget {
   final Widget child;
 
   void _listener(BuildContext context, SpeechRecognizerState state) {
-    final location = LocationHandler.of(context).lastKnowLocation;
+    final location = LocationHandler.of(context).lastKnowLocation.value;
+
+    if (location == null) {
+      return;
+    }
+
     state.optionOrMessageRecognizedEnd.fold(
       () {},
       (userMessage) {
         context.read<EmergencyComposerBloc>().add(
               EmergencyMessageSent(
                 message: userMessage,
-                // TODO: gestione
-                location: location!,
-                senderContactInfo: null
+                location: location,
+                senderContactInfo: null,
               ),
             );
       },

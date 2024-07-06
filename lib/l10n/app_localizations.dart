@@ -126,6 +126,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Brightness'**
   String get brightness;
+
+  /// No description provided for @emergencyContacts.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency Contacts'**
+  String get emergencyContacts;
+
+  /// No description provided for @noConnectivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, you are offline. Please check your connection.'**
+  String get noConnectivity;
+
+  /// No description provided for @authorityNumberNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, I couldn\'t find the contact number for the local authorities.'**
+  String get authorityNumberNotFound;
+
+  /// No description provided for @messageNotRecognized.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, I couldn\'t understand the message'**
+  String get messageNotRecognized;
+
+  /// No description provided for @locationNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, I can\'t seem to determine your location.'**
+  String get locationNotFound;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:safegem/presentation/ui/widget/handler/connectivity_handler.dart';
 import 'handler.dart';
 
 class Startup extends StatelessWidget {
@@ -11,8 +12,10 @@ class Startup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LocationHandler(
-      child: child,
+    return ConnectivityHandler(
+      child: LocationHandler(
+        child: child,
+      ),
     );
   }
 }

@@ -30,7 +30,7 @@ dependencies:
   hydrated_bloc: ^9.1.5
   path_provider: ^2.1.3
   geolocator: ^12.0.0
-  permission_handler: ^11.3.1
+  connectivity_plus: ^6.0.3
 
 
   # di
@@ -43,6 +43,8 @@ dependencies:
   dartz: ^0.10.1
   equatable: ^2.0.5
 
+  json_annotation: 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -52,6 +54,7 @@ dev_dependencies:
   # code gen
   injectable_generator:
   build_runner:
+  json_serializable: ^6.8.0
 
 flutter:
   uses-material-design: true

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart' as g;
 import 'package:safegem/domain/model/model.dart';
@@ -23,12 +24,13 @@ class LocationHandler extends StatefulWidget {
 class LocationHandlerState extends State<LocationHandler> {
   var _permissionGranted = false;
   StreamSubscription<Location>? _positionSubscription;
-  Location? _lastKnownLocation;
+  late ValueNotifier<Location?> _lastKnownLocation;
 
-  Location? get lastKnowLocation => _lastKnownLocation;
+  ValueListenable<Location?> get lastKnowLocation => _lastKnownLocation;
 
   @override
   void initState() {
+    _lastKnownLocation = ValueNotifier(null);
     super.initState();
     _checkPermission().then((_) => _collectionLocation());
   }
@@ -95,7 +97,7 @@ class LocationHandlerState extends State<LocationHandler> {
     _positionSubscription =
         g.Geolocator.getPositionStream(locationSettings: settings)
             .map(_positionMap)
-            .listen((location) => _lastKnownLocation = location);
+            .listen((location) => _lastKnownLocation.value = location);
   }
 
   @override
@@ -107,5 +109,29 @@ class LocationHandlerState extends State<LocationHandler> {
   @override
   Widget build(BuildContext context) {
     return widget.child;
+  }
+}
+
+class LastKnowLocationBuilder extends StatelessWidget {
+  const LastKnowLocationBuilder({
+    super.key,
+    required this.builder,
+  });
+
+  final Widget Function(
+    BuildContext context,
+    Location? location,
+  ) builder;
+
+  @override
+  Widget build(BuildContext context) {
+    final location = LocationHandler.of(context).lastKnowLocation;
+
+    return ValueListenableBuilder(
+      valueListenable: location,
+      builder: (context, value, child) {
+        return builder(context, value);
+      },
+    );
   }
 }

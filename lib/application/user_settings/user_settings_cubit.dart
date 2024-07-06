@@ -2,8 +2,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:safegem/domain/domain.dart';
 
 part 'user_settings_state.dart';
+part 'user_settings_cubit.g.dart';
 
 @injectable
 class UserSettingsCubit extends HydratedCubit<UserSettingsState> {
@@ -19,21 +22,11 @@ class UserSettingsCubit extends HydratedCubit<UserSettingsState> {
 
   @override
   UserSettingsState? fromJson(Map<String, dynamic> json) {
-    return UserSettingsState(
-      availableColors: AppColor.values,
-      darkMode: json['darkMode'] as bool? ?? false,
-      selectedColor: AppColor._fromString(
-        json['primaryColor'] as String?,
-        () => AppColor.blue,
-      ),
-    );
+    return UserSettingsState.fromJson(json);
   }
 
   @override
   Map<String, dynamic>? toJson(UserSettingsState state) {
-    return {
-      'darkMode': state.darkMode,
-      'primaryColor': state.selectedColor.name,
-    };
+    return state.toJson();
   }
 }

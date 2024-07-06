@@ -21,4 +21,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get brightness => 'Brightness';
+
+  @override
+  String get emergencyContacts => 'Emergency Contacts';
+
+  @override
+  String get noConnectivity => 'Sorry, you are offline. Please check your connection.';
+
+  @override
+  String get authorityNumberNotFound => 'Sorry, I couldn\'t find the contact number for the local authorities.';
+
+  @override
+  String get messageNotRecognized => 'Sorry, I couldn\'t understand the message';
+
+  @override
+  String get locationNotFound => 'Sorry, I can\'t seem to determine your location.';
 }

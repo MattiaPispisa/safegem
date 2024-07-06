@@ -14,10 +14,14 @@ class Alert extends StatelessWidget {
     final appTheme = context.appTheme();
 
     return Container(
+      width: double.infinity,
       decoration: BoxDecoration(
         color: appTheme.colors.warning,
       ),
-      child: child,
+      child: Padding(
+        padding:  EdgeInsets.all(appTheme.spacing.m),
+        child: child,
+      ),
     );
   }
 }

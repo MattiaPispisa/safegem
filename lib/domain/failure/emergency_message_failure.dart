@@ -4,12 +4,12 @@ sealed class EmergencyMessageFailure extends Equatable {
   const EmergencyMessageFailure();
 
   T map<T>({
-    required T Function(EmergencyMessageAuthorityNumberNotFound) onNotFound,
+    required T Function(EmergencyMessageAuthorityNumberNotFound) onNumberNotFound,
     required T Function(EmergencyMessageNotRecognized) onNotRecognized,
   }) {
     switch (this) {
       case EmergencyMessageAuthorityNumberNotFound notFound:
-        return onNotFound(notFound);
+        return onNumberNotFound(notFound);
       case EmergencyMessageNotRecognized notRecognized:
         return onNotRecognized(notRecognized);
     }

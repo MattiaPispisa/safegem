@@ -1,10 +1,12 @@
 part of 'user_settings_cubit.dart';
 
+@JsonSerializable()
 final class UserSettingsState extends Equatable {
   const UserSettingsState({
     required this.selectedColor,
     required this.darkMode,
     required this.availableColors,
+    required this.emergencyContacts,
   });
 
   factory UserSettingsState.initial() {
@@ -12,12 +14,14 @@ final class UserSettingsState extends Equatable {
       darkMode: false,
       selectedColor: AppColor.blue,
       availableColors: AppColor.values,
+      emergencyContacts: [],
     );
   }
 
   final List<AppColor> availableColors;
   final AppColor selectedColor;
   final bool darkMode;
+  final List<EmergencyContact> emergencyContacts;
 
   MaterialColor get materialColor {
     return selectedColor._color(darkMode);
@@ -27,27 +31,36 @@ final class UserSettingsState extends Equatable {
     return color._color(darkMode);
   }
 
-  UserSettingsState copyWith({
-    bool? darkMode,
-    AppColor? selectedColor,
-  }) {
+  UserSettingsState copyWith(
+      {bool? darkMode,
+      AppColor? selectedColor,
+      List<EmergencyContact>? emergencyContacts}) {
     return UserSettingsState(
       availableColors: availableColors,
       darkMode: darkMode ?? this.darkMode,
       selectedColor: selectedColor ?? this.selectedColor,
+      emergencyContacts: emergencyContacts ?? this.emergencyContacts,
     );
   }
+
+  factory UserSettingsState.fromJson(Map<String, dynamic> json) =>
+      _$UserSettingsStateFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserSettingsStateToJson(this);
 
   @override
   List<Object> get props => [
         selectedColor,
         darkMode,
         availableColors,
+        emergencyContacts,
       ];
 }
 
 enum AppColor {
+  @JsonValue('blue')
   blue('blue'),
+  @JsonValue('violet')
   violet('violet');
 
   const AppColor(this.name);

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:injectable/injectable.dart';
+import 'package:safegem/domain/model/uri.dart';
 import 'package:safegem/domain/domain.dart';
 
 import 'ai_module.dart';
@@ -53,12 +54,12 @@ class ImplEmergencyService extends EmergencyService {
       EmergencyMessage(
         authorityNumber: number,
         message: localizedMessage,
-        sms: Uri(
-          scheme: 'sms',
-          path: number,
-          queryParameters: {
-            'body': localizedMessage,
-          },
+        sms: UriHelper.sms(
+          message: localizedMessage,
+          number: number,
+        ),
+        phone: UriHelper.phone(
+          number: number,
         ),
       ),
     );
