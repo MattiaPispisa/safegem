@@ -4,27 +4,32 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../domain/domain.dart';
+import 'package:safegem/domain/domain.dart';
 
 part 'emergency_contact_event.dart';
 part 'emergency_contact_state.dart';
 
+/// initial parameters for [EmergencyContactBloc]
 class EmergencyContactBlocParams {
+  /// constructor
   const EmergencyContactBlocParams({
     required this.emergencyContact,
   });
 
+  /// if not null an edit is performed starting from [emergencyContact]
   final EmergencyContact? emergencyContact;
 }
 
+/// Business logic to handle the creation/edit of a [EmergencyContact]
 @injectable
 class EmergencyContactBloc
     extends Bloc<EmergencyContactEvent, EmergencyContactState> {
+  /// constructor
   EmergencyContactBloc(@factoryParam EmergencyContactBlocParams params)
       : super(
           EmergencyContactState.initial(
-              emergencyContact: params.emergencyContact),
+            emergencyContact: params.emergencyContact,
+          ),
         ) {
     on<EmergencyContactChangedName>(_onChangedName);
     on<EmergencyContactChangedNumber>(_onChangedNumber);

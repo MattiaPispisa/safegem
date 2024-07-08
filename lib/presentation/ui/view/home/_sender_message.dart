@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:safegem/domain/domain.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
-import '../../../../domain/domain.dart';
 
 class SenderMessage extends StatelessWidget {
   const SenderMessage({
-    super.key,
-    required this.emergencyMessage,
+    required this.emergencyMessage, super.key,
   });
 
   final EmergencyMessage emergencyMessage;
@@ -30,7 +29,7 @@ class SenderMessage extends StatelessWidget {
             child: ConstrainedBox(
               constraints: BoxConstraints(maxHeight: size.height / 3),
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   // mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +54,7 @@ class SenderMessage extends StatelessWidget {
     return Text.rich(
       TextSpan(children: [
         TextSpan(
-          text: "${context.t().to}: ",
+          text: '${context.t().to}: ',
           style: context
               .theme()
               .textTheme
@@ -70,7 +69,7 @@ class SenderMessage extends StatelessWidget {
               .bodyMedium
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
-      ]),
+      ],),
     );
   }
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../application/application.dart';
-import '../../widget/widget.dart';
+import 'package:safegem/application/application.dart';
+import 'package:safegem/presentation/ui/widget/widget.dart';
 
 class SpeechToRecognizer extends StatelessWidget {
-  const SpeechToRecognizer({super.key, required this.child});
+  const SpeechToRecognizer({required this.child, super.key});
 
   final Widget child;
 

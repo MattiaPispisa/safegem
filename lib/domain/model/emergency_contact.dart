@@ -10,11 +10,11 @@ class EmergencyContact extends Equatable {
     required this.number,
   });
 
-  final String displayName;
-  final String number;
-
   factory EmergencyContact.fromJson(Map<String, dynamic> json) =>
       _$EmergencyContactFromJson(json);
+
+  final String displayName;
+  final String number;
 
   Map<String, dynamic> toJson() => _$EmergencyContactToJson(this);
 

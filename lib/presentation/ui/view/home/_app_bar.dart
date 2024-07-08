@@ -17,14 +17,14 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           onPressed: () => _goSettings(context),
-          icon: FaIcon(
+          icon: const FaIcon(
             FontAwesomeIcons.gear,
           ),
-        )
+        ),
       ],
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

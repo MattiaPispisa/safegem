@@ -8,7 +8,7 @@ import 'package:safegem/injection.dart';
 /// - [configureDependencies]
 ///
 /// then [runApp] callback
-void bootstrap({
+Future<void> bootstrap({
   required Widget Function() then,
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +17,6 @@ void bootstrap({
       await HydratedStorage.build(storageDirectory: storageDirectory);
 
   await configureDependencies(
-      String.fromEnvironment('ENVIRONMENT', defaultValue: "develop"));
+      const String.fromEnvironment('ENVIRONMENT', defaultValue: 'develop'),);
   runApp(then());
 }

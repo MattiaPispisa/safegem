@@ -7,7 +7,7 @@ sealed class SendMessageFailure extends Equatable {
     required T Function(SendMessageNotSent notSent) onNotSent,
   }) {
     switch (this) {
-      case SendMessageNotSent notSent:
+      case final SendMessageNotSent notSent:
         return onNotSent(notSent);
     }
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safegem/bootstrap.dart';
 import 'package:safegem/injection.dart';
 import 'package:safegem/l10n/app_localizations.dart';
-import 'presentation/ui/widget/widget.dart';
+import 'package:safegem/presentation/ui/widget/widget.dart';
 
 void main() {
   bootstrap(then: () => const MyApp());

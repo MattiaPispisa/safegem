@@ -7,8 +7,7 @@ import 'package:safegem/domain/model/model.dart';
 
 class LocationHandler extends StatefulWidget {
   const LocationHandler({
-    super.key,
-    required this.child,
+    required this.child, super.key,
   });
 
   final Widget child;
@@ -69,11 +68,10 @@ class LocationHandlerState extends State<LocationHandler> {
         activityType: g.ActivityType.fitness,
         distanceFilter: 100,
         pauseLocationUpdatesAutomatically: true,
-        showBackgroundLocationIndicator: false,
       );
     }
 
-    return g.LocationSettings(
+    return const g.LocationSettings(
       accuracy: g.LocationAccuracy.high,
       distanceFilter: 100,
     );
@@ -114,8 +112,7 @@ class LocationHandlerState extends State<LocationHandler> {
 
 class LastKnowLocationBuilder extends StatelessWidget {
   const LastKnowLocationBuilder({
-    super.key,
-    required this.builder,
+    required this.builder, super.key,
   });
 
   final Widget Function(

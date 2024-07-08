@@ -3,11 +3,9 @@ import 'package:safegem/presentation/ui/extension/extension.dart';
 
 class ChipButton extends StatelessWidget {
   const ChipButton(
-      {super.key,
-      required this.iconData,
+      {required this.iconData, required this.text, super.key,
       this.iconColor,
-      required this.text,
-      this.onPressed});
+      this.onPressed,});
 
   final IconData iconData;
   final Color? iconColor;
@@ -20,10 +18,9 @@ class ChipButton extends StatelessWidget {
     return InputChip(
       elevation: 0,
       pressElevation: 0,
-      padding: EdgeInsets.all(0),
+      padding: const EdgeInsets.all(0),
       labelPadding: EdgeInsets.symmetric(
         horizontal: theme.spacing.m,
-        vertical: 0,
       ),
       visualDensity: VisualDensity.compact,
       label: Row(
@@ -34,7 +31,7 @@ class ChipButton extends StatelessWidget {
             size: 12,
             color: iconColor,
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Text(text),
         ],
       ),

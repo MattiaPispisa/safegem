@@ -4,9 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
-import 'package:safegem/domain/model/model.dart';
-
-import '../../domain/domain.dart';
+import 'package:safegem/domain/domain.dart';
 
 part 'speech_recognizer_event.dart';
 part 'speech_recognizer_state.dart';
@@ -78,7 +76,7 @@ class SpeechRecognizerBloc
       return emit(state.copyWith(
         recognizedWords: result.recognizedWords,
         isListening: true,
-      ));
+      ),);
     }
 
     emit(

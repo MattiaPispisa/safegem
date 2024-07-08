@@ -5,8 +5,7 @@ import 'package:safegem/injection.dart';
 
 class EmergencyComposerProvider extends StatelessWidget {
   const EmergencyComposerProvider({
-    super.key,
-    required this.child,
+    required this.child, super.key,
   });
 
   final Widget child;
@@ -22,9 +21,7 @@ class EmergencyComposerProvider extends StatelessWidget {
 
 class EmergencyComposerConsumer extends StatelessWidget {
   const EmergencyComposerConsumer({
-    super.key,
-    required this.builder,
-    required this.listener,
+    required this.builder, required this.listener, super.key,
   });
 
   final Widget Function(BuildContext context, EmergencyComposerState state)
@@ -42,9 +39,7 @@ class EmergencyComposerConsumer extends StatelessWidget {
 
 class EmergencyComposerSelector<T> extends StatelessWidget {
   const EmergencyComposerSelector({
-    super.key,
-    required this.selector,
-    required this.builder,
+    required this.selector, required this.builder, super.key,
   });
 
   final T Function(EmergencyComposerState state) selector;
@@ -64,9 +59,7 @@ class EmergencyComposerSelector<T> extends StatelessWidget {
 
 class EmergencyComposerListener extends StatelessWidget {
   const EmergencyComposerListener({
-    super.key,
-    required this.listener,
-    required this.child,
+    required this.listener, required this.child, super.key,
   });
 
   final Widget child;
@@ -78,8 +71,8 @@ class EmergencyComposerListener extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<EmergencyComposerBloc, EmergencyComposerState>(
-      child: child,
       listener: listener,
+      child: child,
     );
   }
 }

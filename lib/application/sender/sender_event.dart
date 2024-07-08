@@ -1,28 +1,22 @@
 part of 'sender_bloc.dart';
 
+/// base class for [SenderBloc]
 sealed class SenderEvent extends Equatable {
   const SenderEvent();
 }
 
+/// event on message sent
 final class SenderMessageSent extends SenderEvent {
+  /// constructor
   const SenderMessageSent({
-    required this.wait,
     required this.emergencyMessage,
   });
 
-  final Duration wait;
+  /// emergency message to sent
   final EmergencyMessage emergencyMessage;
 
   @override
   List<Object?> get props => [
-        wait,
         emergencyMessage,
       ];
-}
-
-final class SenderUndoSent extends SenderEvent {
-  const SenderUndoSent();
-
-  @override
-  List<Object?> get props => [];
 }

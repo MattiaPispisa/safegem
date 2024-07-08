@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:safegem/domain/domain.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
-
-import '../../widget/widget.dart';
-import '_sender_button.dart';
-import '_sender_message.dart';
-import '_sender_secondary_actions.dart';
+import 'package:safegem/presentation/ui/view/home/_sender_button.dart';
+import 'package:safegem/presentation/ui/view/home/_sender_message.dart';
+import 'package:safegem/presentation/ui/view/home/_sender_secondary_actions.dart';
+import 'package:safegem/presentation/ui/widget/widget.dart';
 
 class BlocSender extends StatefulWidget {
   const BlocSender({super.key});
@@ -56,8 +55,7 @@ class _BlocSenderState extends State<BlocSender>
 
 class Sender extends StatelessWidget {
   const Sender({
-    super.key,
-    required this.emergencyMessage,
+    required this.emergencyMessage, super.key,
   });
   final EmergencyMessage emergencyMessage;
 
@@ -66,7 +64,7 @@ class Sender extends StatelessWidget {
     final theme = context.appTheme();
 
     return _SenderContainer(
-      key: ValueKey('sender_container'),
+      key: const ValueKey('sender_container'),
       child: Column(
         children: [
           Row(
@@ -75,20 +73,20 @@ class Sender extends StatelessWidget {
             children: [
               Expanded(
                 child: SenderMessage(
-                  key: ValueKey('sender_message'),
+                  key: const ValueKey('sender_message'),
                   emergencyMessage: emergencyMessage,
                 ),
               ),
               SizedBox(width: theme.spacing.m),
               SenderButton(
-                key: ValueKey('sender_button'),
+                key: const ValueKey('sender_button'),
                 emergencyMessage: emergencyMessage,
-              )
+              ),
             ],
           ),
           SizedBox(height: theme.spacing.m),
           SenderSecondaryActions(
-            key: ValueKey('sender_secondary_actions'),
+            key: const ValueKey('sender_secondary_actions'),
             emergencyMessage: emergencyMessage,
           ),
           SizedBox(height: theme.spacing.s),
@@ -100,8 +98,7 @@ class Sender extends StatelessWidget {
 
 class _SenderContainer extends StatelessWidget {
   const _SenderContainer({
-    super.key,
-    required this.child,
+    required this.child, super.key,
   });
 
   final Widget child;

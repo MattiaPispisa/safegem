@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
 import 'package:safegem/presentation/ui/widget/widget.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 class BlocRecognizedText extends StatelessWidget {
   const BlocRecognizedText({super.key});
@@ -27,10 +27,7 @@ class BlocRecognizedText extends StatelessWidget {
 
 class RecognizedText extends StatelessWidget {
   const RecognizedText({
-    super.key,
-    required this.composingMessage,
-    required this.listening,
-    required this.recognizedWords,
+    required this.composingMessage, required this.listening, required this.recognizedWords, super.key,
   });
 
   final bool composingMessage;
@@ -55,7 +52,6 @@ class RecognizedText extends StatelessWidget {
 
 class _ComposingRecognizedWords extends StatelessWidget {
   const _ComposingRecognizedWords({
-    super.key,
     required this.recognizedWords,
   });
 
@@ -75,7 +71,6 @@ class _ComposingRecognizedWords extends StatelessWidget {
 
 class _TextUnderRecognition extends StatelessWidget {
   const _TextUnderRecognition({
-    super.key,
     required this.recognizedWords,
   });
 

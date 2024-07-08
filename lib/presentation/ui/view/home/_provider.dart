@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../widget/widget.dart';
+import 'package:safegem/presentation/ui/widget/widget.dart';
 
 class HomeProviders extends StatelessWidget {
   const HomeProviders({
-    super.key,
-    required this.child,
+    required this.child, super.key,
   });
 
   final Widget child;

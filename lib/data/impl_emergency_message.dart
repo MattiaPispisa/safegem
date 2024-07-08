@@ -1,10 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:injectable/injectable.dart';
-import 'package:safegem/domain/model/uri.dart';
+import 'package:safegem/data/ai_module.dart';
 import 'package:safegem/domain/domain.dart';
-
-import 'ai_module.dart';
 
 // phone reg exp inside text
 final RegExp phoneRegExp = RegExp(r'\+?\d[\d-. ]*(?:\d)');
@@ -76,7 +74,7 @@ class ImplEmergencyService extends EmergencyService {
         'latitude "${dto.location.latitude}" longitude "${dto.location.longitude}". '
         'This is happening: "${dto.message.message}". '
         'Give me the phone number of the most appropriate authority '
-        'in the following format: authority name: number, don\'t write anything else.';
+        "in the following format: authority name: number, don't write anything else.";
     final content = [Content.text(message)];
     final response = await _ai.generateContent(content);
     final match = phoneRegExp.firstMatch(response.text!);
@@ -91,7 +89,7 @@ class ImplEmergencyService extends EmergencyService {
         ' I am at the following geographic coordinates:'
         ' latitude "${dto.location.latitude}" longitude "${dto.location.longitude}".'
         ' This is happening: "${dto.message.message}".'
-        'Don\'t write anything else besides the translated message.';
+        "Don't write anything else besides the translated message.";
     final content = [Content.text(message)];
     final response = await _ai.generateContent(content);
     return response.text!;

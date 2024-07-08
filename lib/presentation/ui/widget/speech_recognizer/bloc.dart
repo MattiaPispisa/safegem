@@ -6,8 +6,7 @@ import 'package:safegem/injection.dart';
 /// [BlocProvider] with [SpeechRecognizerBloc]
 class SpeechRecognizerProvider extends StatelessWidget {
   const SpeechRecognizerProvider({
-    super.key,
-    required this.child,
+    required this.child, super.key,
   });
 
   final Widget child;
@@ -24,9 +23,7 @@ class SpeechRecognizerProvider extends StatelessWidget {
 /// [BlocConsumer] with [SpeechRecognizerBloc]
 class SpeechRecognizerConsumer extends StatelessWidget {
   const SpeechRecognizerConsumer({
-    super.key,
-    required this.builder,
-    required this.listener,
+    required this.builder, required this.listener, super.key,
   });
 
   final Widget Function(
@@ -50,8 +47,7 @@ class SpeechRecognizerConsumer extends StatelessWidget {
 /// [BlocBuilder] with [SpeechRecognizerBloc]
 class SpeechRecognizerBuilder extends StatelessWidget {
   const SpeechRecognizerBuilder({
-    super.key,
-    required this.builder,
+    required this.builder, super.key,
   });
 
   final Widget Function(
@@ -70,9 +66,7 @@ class SpeechRecognizerBuilder extends StatelessWidget {
 /// [BlocSelector] with [SpeechRecognizerBloc]
 class SpeechRecognizerSelector<T> extends StatelessWidget {
   const SpeechRecognizerSelector({
-    super.key,
-    required this.selector,
-    required this.builder,
+    required this.selector, required this.builder, super.key,
   });
 
   final T Function(SpeechRecognizerState state) selector;
@@ -93,8 +87,7 @@ class SpeechRecognizerSelector<T> extends StatelessWidget {
 /// [builder] with [SpeechRecognizerState.isListening]
 class SpeechRecognizerIsListening extends StatelessWidget {
   const SpeechRecognizerIsListening({
-    super.key,
-    required this.builder,
+    required this.builder, super.key,
   });
 
   final Widget Function(
@@ -114,10 +107,8 @@ class SpeechRecognizerIsListening extends StatelessWidget {
 /// [BlocListener] with [SpeechRecognizerBloc]
 class SpeechRecognizerListener extends StatelessWidget {
   const SpeechRecognizerListener({
-    super.key,
-    required this.listener,
+    required this.listener, required this.child, super.key,
     this.listenWhen,
-    required this.child,
   });
 
   final void Function(
@@ -143,9 +134,7 @@ class SpeechRecognizerListener extends StatelessWidget {
 /// run [onListening] on [SpeechRecognizerState.isListening] change
 class SpeechRecognizerOnStartListening extends StatelessWidget {
   const SpeechRecognizerOnStartListening({
-    super.key,
-    required this.onListening,
-    required this.child,
+    required this.onListening, required this.child, super.key,
   });
 
   final void Function() onListening;

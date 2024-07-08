@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppGestureDetector extends StatelessWidget {
   const AppGestureDetector({
-    super.key,
+    required this.child, super.key,
     this.onTap,
-    required this.child,
   });
 
   final VoidCallback? onTap;

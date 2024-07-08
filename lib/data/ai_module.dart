@@ -11,7 +11,7 @@ sealed class AIException implements Exception {}
 
 final class AIUnsupportedLocationException implements AIException {}
 
-@Singleton(as: AI, env: ["production"])
+@Singleton(as: AI, env: ['production'])
 class GoogleAI implements AI {
   const GoogleAI({required GenerativeModel model}) : _model = model;
 
@@ -29,19 +29,19 @@ class GoogleAI implements AI {
   }
 }
 
-@Singleton(as: AI, env: ["develop"])
+@Singleton(as: AI, env: ['develop'])
 class MockAI implements AI {
   const MockAI();
 
   @override
   Future<GenerateContentResponse> generateContent(
-      Iterable<Content> prompt) async {
+      Iterable<Content> prompt,) async {
     try {
-      await Future<void>.delayed(Duration(seconds: 1));
+      await Future<void>.delayed(const Duration(seconds: 1));
       return GenerateContentResponse(
         [
-          Candidate(Content.text("police:112 ${_generateRandomString(10)}"),
-              null, null, null, null),
+          Candidate(Content.text('police:112 ${_generateRandomString(10)}'),
+              null, null, null, null,),
         ],
         null,
       );
@@ -51,9 +51,9 @@ class MockAI implements AI {
   }
 
   String _generateRandomString(int length) {
-    const String chars =
+    const chars =
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    final Random random = Random();
+    final random = Random();
 
     return List.generate(length, (index) => chars[random.nextInt(chars.length)])
         .join();
@@ -68,7 +68,7 @@ abstract class GoogleGenerativeModule {
 
     final generationConfig = GenerationConfig();
 
-    List<SafetySetting> safetySettings = [];
+    final safetySettings = <SafetySetting>[];
 
     return GenerativeModel(
       model: 'gemini-1.5-flash-latest',

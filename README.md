@@ -36,4 +36,16 @@ The user will be presented with the translated message along with the phone numb
 
 ## Architecture
 
+The application is designed in 4 layers: **domain**, **data**, **application**, **presentation**.
+
+**Domain**: Defines the service interfaces and domain models for `safegem`. The service methods are managed with a functional approach to avoid handling exceptions on the application side since these are mapped to failures in advance.
+
+**Data**: Implements the domain services and encapsulates the libraries used for the project: `google_generative_ai` and `speech_to_text`. This makes it easy to change the concrete implementation. For example, in Italy, `google_generative_ai` is not freely available (as it is in the USA), so most tests within the app have been performed using a mocked implementation of the AI service. In the future, where "google_generative_ai" is unavailable, another AI could be used.
+
+**Application**: Defines the business logic of the application. These are primarily implemented using `BLoC`. Concrete services, like the BLoCs, are obtained through dependency injection using `getIt` as a service locator.
+
+**Presentation**: Handles the widget, routing, theming, and localization aspects of the application. Here, routing is also managed through `getIt`.
+
+To maintain high code quality, `very_good_analysis` has been included as a linter to ensure 100% API documentation.
+
 ## The future

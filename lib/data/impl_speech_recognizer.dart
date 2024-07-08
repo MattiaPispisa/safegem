@@ -1,9 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:safegem/domain/domain.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:speech_to_text/speech_to_text.dart';
-
-import '../domain/domain.dart';
 
 @LazySingleton(as: SpeechRecognizerService)
 class ImplSpeechRecognizerService implements SpeechRecognizerService {

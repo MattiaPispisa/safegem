@@ -1,6 +1,8 @@
 part of 'sender_bloc.dart';
 
+/// state of [SenderBloc]
 final class SenderState extends Equatable {
+  /// constructor
   const SenderState({
     required this.sending,
     required this.timerBeforeSend,
@@ -8,6 +10,7 @@ final class SenderState extends Equatable {
     required this.emergencyMessage,
   });
 
+  /// [SenderBloc] initial state
   factory SenderState.initial() {
     return SenderState(
       sending: false,
@@ -17,11 +20,19 @@ final class SenderState extends Equatable {
     );
   }
 
+  /// is sending [emergencyMessage]
   final bool sending;
+
+  /// delay before sending
   final Option<int> timerBeforeSend;
+
+  /// after sending some is returned. Failure if an error is return else unit
   final Option<Either<SendMessageFailure, Unit>> optionFailureOrMessageSent;
+
+  /// emergency message to send
   final Option<EmergencyMessage> emergencyMessage;
 
+  /// default copy with
   SenderState copyWith({
     bool? sending,
     Option<int>? timerBeforeSend,

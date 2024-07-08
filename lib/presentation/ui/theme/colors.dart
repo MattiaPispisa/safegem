@@ -7,7 +7,7 @@ class AppColors extends ThemeExtension<AppColors> {
   });
 
   factory AppColors.light() {
-    return AppColors(
+    return const AppColors(
       warning: Colors.amber,
       neutral: MaterialColor(
         0xFF6D6D6D,
@@ -28,7 +28,7 @@ class AppColors extends ThemeExtension<AppColors> {
   }
 
   factory AppColors.dark() {
-    return AppColors(
+    return const AppColors(
       warning: Colors.amber,
       neutral: MaterialColor(
         0xFFABABAB,

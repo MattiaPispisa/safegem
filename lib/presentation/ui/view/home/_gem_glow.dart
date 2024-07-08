@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:safegem/application/application.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
-import '../../widget/widget.dart';
+import 'package:safegem/presentation/ui/widget/widget.dart';
 
 class BlocGemGlow extends StatelessWidget {
-  const BlocGemGlow();
+  const BlocGemGlow({super.key});
 
   void _onTap(BuildContext context) {
     context.read<SpeechRecognizerBloc>().add(SpeechRecognizerToggledSpeech());
@@ -28,9 +28,7 @@ class BlocGemGlow extends StatelessWidget {
 
 class GemGlow extends StatelessWidget {
   const GemGlow({
-    super.key,
-    required this.animated,
-    required this.onTap,
+    required this.animated, required this.onTap, super.key,
   });
 
   final VoidCallback onTap;
@@ -41,12 +39,9 @@ class GemGlow extends StatelessWidget {
     final theme = context.theme();
 
     return AvatarGlow(
-      repeat: true,
       glowColor: theme.primaryColor,
-      glowShape: BoxShape.circle,
       animate: animated,
       glowRadiusFactor: 0.6,
-      curve: Curves.fastOutSlowIn,
       child: _gem(context),
     );
   }

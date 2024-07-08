@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:safegem/presentation/ui/widget/handler/connectivity_handler.dart';
-import 'handler.dart';
+import 'package:safegem/presentation/ui/widget/handler/handler.dart';
 
 class Startup extends StatelessWidget {
   const Startup({
-    super.key,
-    required this.child,
+    required this.child, super.key,
   });
 
   final Widget child;

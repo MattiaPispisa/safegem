@@ -6,8 +6,7 @@ import 'package:safegem/injection.dart';
 
 class SenderBlocProvider extends StatelessWidget {
   const SenderBlocProvider({
-    super.key,
-    required this.child,
+    required this.child, super.key,
   });
 
   final Widget child;
@@ -23,9 +22,7 @@ class SenderBlocProvider extends StatelessWidget {
 
 class SenderConsumer extends StatelessWidget {
   const SenderConsumer({
-    super.key,
-    required this.builder,
-    required this.listener,
+    required this.builder, required this.listener, super.key,
   });
 
   final Widget Function(BuildContext context, SenderState state) builder;
@@ -42,8 +39,7 @@ class SenderConsumer extends StatelessWidget {
 
 class SenderBuilder extends StatelessWidget {
   const SenderBuilder({
-    super.key,
-    required this.builder,
+    required this.builder, super.key,
   });
 
   final Widget Function(
@@ -61,9 +57,7 @@ class SenderBuilder extends StatelessWidget {
 
 class SenderOnNewMessage extends StatelessWidget {
   const SenderOnNewMessage({
-    super.key,
-    required this.onMessage,
-    required this.child,
+    required this.onMessage, required this.child, super.key,
   });
 
   final void Function(EmergencyMessage message) onMessage;
@@ -73,9 +67,7 @@ class SenderOnNewMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<SenderBloc, SenderState>(
       listener: (context, state) {
-        state.emergencyMessage.fold(() {}, (message) {
-          onMessage(message);
-        });
+        state.emergencyMessage.fold(() {}, onMessage);
       },
       listenWhen: (previous, current) {
         return previous.emergencyMessage != current.emergencyMessage;

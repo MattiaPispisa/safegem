@@ -11,11 +11,11 @@ sealed class EmergencyMessageFailure extends Equatable {
         onUnsupportedUserLocation,
   }) {
     switch (this) {
-      case EmergencyMessageAuthorityNumberNotFound notFound:
+      case final EmergencyMessageAuthorityNumberNotFound notFound:
         return onNumberNotFound(notFound);
-      case EmergencyMessageNotRecognized notRecognized:
+      case final EmergencyMessageNotRecognized notRecognized:
         return onNotRecognized(notRecognized);
-      case EmergencyMessageUnsupportedUserLocation unsupportedUserLocation:
+      case final EmergencyMessageUnsupportedUserLocation unsupportedUserLocation:
         return onUnsupportedUserLocation(unsupportedUserLocation);
     }
   }

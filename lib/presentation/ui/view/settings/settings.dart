@@ -30,7 +30,7 @@ class SettingsView extends StatelessWidget {
           body: Padding(
             padding: EdgeInsets.all(theme.app.spacing.l),
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -58,7 +58,6 @@ class SettingsView extends StatelessWidget {
     final theme = context.theme();
 
     return Wrap(
-      direction: Axis.horizontal,
       spacing: theme.app.spacing.l,
       children: state.availableColors.map((color) {
         return SelectableColor(

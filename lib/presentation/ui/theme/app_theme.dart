@@ -11,14 +11,14 @@ class AppTheme extends ThemeExtension<AppTheme> {
   factory AppTheme.light() {
     return AppTheme(
       colors: AppColors.light(),
-      spacing: AppSpacing(),
+      spacing: const AppSpacing(),
     );
   }
 
   factory AppTheme.dark() {
     return AppTheme(
       colors: AppColors.dark(),
-      spacing: AppSpacing(),
+      spacing: const AppSpacing(),
     );
   }
 

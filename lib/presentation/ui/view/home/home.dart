@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
+import 'package:safegem/presentation/ui/view/home/_app_bar.dart';
 import 'package:safegem/presentation/ui/view/home/_emergency_listener.dart';
+import 'package:safegem/presentation/ui/view/home/_error.dart';
+import 'package:safegem/presentation/ui/view/home/_gem_glow.dart';
 import 'package:safegem/presentation/ui/view/home/_provider.dart';
+import 'package:safegem/presentation/ui/view/home/_recognized_text.dart';
 import 'package:safegem/presentation/ui/view/home/_sender.dart';
-
-import '_app_bar.dart';
-import '_error.dart';
-import '_gem_glow.dart';
-import '_recognized_text.dart';
-import '_speech_to_emergnecy.dart';
+import 'package:safegem/presentation/ui/view/home/_speech_to_emergnecy.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -27,20 +26,20 @@ class HomeView extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          BlocGemGlow(),
+                          const BlocGemGlow(),
                           SizedBox(height: theme.spacing.between),
-                          BlocRecognizedText(),
+                          const BlocRecognizedText(),
                         ],
                       ),
                     ),
                   ),
                 ),
-                BlocSender(),
-                BlocError(),
+                const BlocSender(),
+                const BlocError(),
               ],
             ),
           ),

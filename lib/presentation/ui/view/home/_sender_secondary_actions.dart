@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:safegem/domain/domain.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
+import 'package:safegem/presentation/ui/view/home/_sender_constants.dart';
+import 'package:safegem/presentation/ui/widget/widget.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../../domain/domain.dart';
-import '../../widget/widget.dart';
-import '_sender_constants.dart';
 
 class SenderSecondaryActions extends StatelessWidget {
   const SenderSecondaryActions({
-    super.key,
-    required this.emergencyMessage,
+    required this.emergencyMessage, super.key,
   });
 
   final EmergencyMessage emergencyMessage;

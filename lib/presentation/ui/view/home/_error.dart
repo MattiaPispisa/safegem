@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
 
-import '../../widget/widget.dart';
+import 'package:safegem/presentation/ui/widget/widget.dart';
 
 class BlocError extends StatelessWidget {
   const BlocError({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final nothing = SizedBox();
+    const nothing = SizedBox();
 
     return LastKnowConnectivityBuilder(builder: (context, connectivity) {
       if (connectivity.isNotConnected) {
@@ -49,8 +49,8 @@ class BlocError extends StatelessWidget {
             );
           },
         );
-      });
-    });
+      },);
+    },);
   }
 
   Widget _alert(String text) {

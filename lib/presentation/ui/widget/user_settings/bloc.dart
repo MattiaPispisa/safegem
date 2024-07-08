@@ -6,8 +6,7 @@ import 'package:safegem/injection.dart';
 /// [BlocProvider] with [UserSettingsCubit]
 class UserSettingsProvider extends StatelessWidget {
   const UserSettingsProvider({
-    super.key,
-    required this.child,
+    required this.child, super.key,
   });
 
   final Widget child;

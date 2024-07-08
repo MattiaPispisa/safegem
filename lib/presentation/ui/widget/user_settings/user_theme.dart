@@ -6,8 +6,7 @@ import 'package:safegem/presentation/ui/theme/app_theme.dart';
 /// From [UserSettingsState] compute the app [ThemeData]
 class UserTheme extends StatelessWidget {
   const UserTheme({
-    super.key,
-    required this.builder,
+    required this.builder, super.key,
   });
 
   final Widget Function(BuildContext context, ThemeData theme) builder;
@@ -46,7 +45,7 @@ class UserTheme extends StatelessWidget {
     AppTheme appTheme,
     UserSettingsState state,
   ) {
-    final iconTheme = IconThemeData(
+    const iconTheme = IconThemeData(
       size: 20,
     );
     final textTheme = theme.textTheme.copyWith(

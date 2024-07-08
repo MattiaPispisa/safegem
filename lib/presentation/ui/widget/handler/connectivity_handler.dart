@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:connectivity_plus/connectivity_plus.dart' as c;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:connectivity_plus/connectivity_plus.dart' as c;
 import 'package:flutter/widgets.dart';
 
 enum Connectivity {
@@ -15,8 +15,7 @@ enum Connectivity {
 
 class ConnectivityHandler extends StatefulWidget {
   const ConnectivityHandler({
-    super.key,
-    required this.child,
+    required this.child, super.key,
   });
 
   final Widget child;
@@ -85,8 +84,7 @@ class ConnectivityHandlerState extends State<ConnectivityHandler> {
 
 class LastKnowConnectivityBuilder extends StatelessWidget {
   const LastKnowConnectivityBuilder({
-    super.key,
-    required this.builder,
+    required this.builder, super.key,
   });
 
   final Widget Function(

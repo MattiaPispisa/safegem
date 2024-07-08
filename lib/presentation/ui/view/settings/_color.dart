@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
 
-import '../../widget/widget.dart';
+import 'package:safegem/presentation/ui/widget/widget.dart';
 
 class SelectableColor extends StatelessWidget {
   const SelectableColor({
-    super.key,
-    required this.selected,
-    required this.color,
-    required this.onTap,
+    required this.selected, required this.color, required this.onTap, super.key,
   });
 
   final bool selected;
@@ -25,7 +22,7 @@ class SelectableColor extends StatelessWidget {
           color: selected ? context.theme().app.colors.neutral.shade900 : color,
         ),
         child: Padding(
-          padding: const EdgeInsets.all(3.0),
+          padding: const EdgeInsets.all(3),
           child: Container(
             height: 30,
             width: 30,
