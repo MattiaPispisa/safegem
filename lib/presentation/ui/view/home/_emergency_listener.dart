@@ -6,7 +6,8 @@ import 'package:safegem/presentation/ui/widget/widget.dart';
 
 class EmergencyListener extends StatelessWidget {
   const EmergencyListener({
-    required this.child, super.key,
+    required this.child,
+    super.key,
   });
 
   final Widget child;
@@ -21,7 +22,6 @@ class EmergencyListener extends StatelessWidget {
             context.read<SenderBloc>().add(
                   SenderMessageSent(
                     emergencyMessage: messageCreated,
-                    wait: const Duration(seconds: 5),
                   ),
                 );
           },

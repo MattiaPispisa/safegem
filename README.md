@@ -38,7 +38,7 @@ The user will be presented with the translated message along with the phone numb
 
 The application is designed in 4 layers: **domain**, **data**, **application**, **presentation**.
 
-**Domain**: Defines the service interfaces and domain models for `safegem`. The service methods are managed with a functional approach to avoid handling exceptions on the application side since these are mapped to failures in advance.
+**Domain**: Defines the service interfaces and domain models for `safegem`. The service methods are managed with a functional approach to avoid handling exceptions on the application side since these are mapped to failures in advance. Since `void` is a keyword used to have a generic behavior the same for everyone, `unit` is used instead of `void`. This way, each service method returns an `object`.
 
 **Data**: Implements the domain services and encapsulates the libraries used for the project: `google_generative_ai` and `speech_to_text`. This makes it easy to change the concrete implementation. For example, in Italy, `google_generative_ai` is not freely available (as it is in the USA), so most tests within the app have been performed using a mocked implementation of the AI service. In the future, where "google_generative_ai" is unavailable, another AI could be used.
 
