@@ -156,6 +156,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sorry, I can\'t seem to determine your location.'**
   String get locationNotFound;
+
+  /// No description provided for @unsupportedLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, but this service is currently not available in your region.'**
+  String get unsupportedLocation;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

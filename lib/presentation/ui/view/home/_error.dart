@@ -36,6 +36,8 @@ class BlocError extends StatelessWidget {
                             context.t().authorityNumberNotFound,
                         onNotRecognized: (_) =>
                             context.t().messageNotRecognized,
+                        onUnsupportedUserLocation: (_) =>
+                            context.t().unsupportedLocation,
                       ),
                     );
                   },

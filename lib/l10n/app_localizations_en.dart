@@ -36,4 +36,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get locationNotFound => 'Sorry, I can\'t seem to determine your location.';
+
+  @override
+  String get unsupportedLocation => 'Sorry, but this service is currently not available in your region.';
 }

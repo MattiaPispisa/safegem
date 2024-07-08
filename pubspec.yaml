@@ -11,50 +11,49 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  intl: any
+  intl: 0.19.0
 
   # routing
   go_router: ^14.2.0
 
   # style
-  cupertino_icons: ^1.0.2
-  avatar_glow:
-  flutter_animate:
-  url_launcher: ^6.3.0
-  font_awesome_flutter: ^10.7.0
+  cupertino_icons: 1.0.8
+  avatar_glow: 3.0.1
+  flutter_animate: 4.5.0
+  url_launcher: 6.3.0
+  font_awesome_flutter: 10.7.0
 
   # business logic
-  speech_to_text:
-  bloc: ^8.1.4
-  flutter_bloc: ^8.1.6
-  hydrated_bloc: ^9.1.5
-  path_provider: ^2.1.3
-  geolocator: ^12.0.0
-  connectivity_plus: ^6.0.3
-
+  speech_to_text: 6.6.2
+  bloc: 8.1.4
+  flutter_bloc: 8.1.6
+  hydrated_bloc: 9.1.5
+  path_provider: 2.1.3
+  geolocator: 12.0.0
+  connectivity_plus: 6.0.3
 
   # di
-  get_it: ^7.7.0
-  injectable:
+  get_it: 7.7.0
+  injectable: 2.4.2
 
   # ai
-  google_generative_ai: ^0.4.1
+  google_generative_ai: 0.4.3
 
-  dartz: ^0.10.1
-  equatable: ^2.0.5
+  dartz: 0.10.1
+  equatable: 2.0.5
 
-  json_annotation: 
+  json_annotation: 4.9.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  very_good_analysis: ^5.1.0
+  very_good_analysis: 5.1.0
 
   # code gen
-  injectable_generator:
-  build_runner:
-  json_serializable: ^6.8.0
+  injectable_generator: 2.6.1
+  build_runner: 2.4.11
+  json_serializable: 6.8.0
 
 flutter:
   uses-material-design: true

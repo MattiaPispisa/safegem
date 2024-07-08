@@ -10,5 +10,6 @@
   "noConnectivity": "Sorry, you are offline. Please check your connection.",
   "authorityNumberNotFound": "Sorry, I couldn't find the contact number for the local authorities.",
   "messageNotRecognized": "Sorry, I couldn't understand the message",
-  "locationNotFound": "Sorry, I can't seem to determine your location."
+  "locationNotFound": "Sorry, I can't seem to determine your location.",
+  "unsupportedLocation": "Sorry, but this service is currently not available in your region."
 }

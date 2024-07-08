@@ -7,6 +7,10 @@ abstract class AI {
   Future<GenerateContentResponse> generateContent(Iterable<Content> prompt);
 }
 
+sealed class AIException implements Exception {}
+
+final class AIUnsupportedLocationException implements AIException {}
+
 @Singleton(as: AI, env: ["production"])
 class GoogleAI implements AI {
   const GoogleAI({required GenerativeModel model}) : _model = model;
@@ -15,11 +19,16 @@ class GoogleAI implements AI {
 
   @override
   Future<GenerateContentResponse> generateContent(Iterable<Content> prompt) {
-    return _model.generateContent(prompt);
+    try {
+      return _model.generateContent(prompt);
+    } on GenerativeAIException {
+      throw AIUnsupportedLocationException();
+    } catch (e) {
+      rethrow;
+    }
   }
 }
 
-// TODO: read from assets
 @Singleton(as: AI, env: ["develop"])
 class MockAI implements AI {
   const MockAI();
@@ -27,14 +36,18 @@ class MockAI implements AI {
   @override
   Future<GenerateContentResponse> generateContent(
       Iterable<Content> prompt) async {
-    await Future<void>.delayed(Duration(seconds: 1));
-    return GenerateContentResponse(
-      [
-        Candidate(Content.text("police:112 ${_generateRandomString(10)}"), null,
-            null, null, null),
-      ],
-      null,
-    );
+    try {
+      await Future<void>.delayed(Duration(seconds: 1));
+      return GenerateContentResponse(
+        [
+          Candidate(Content.text("police:112 ${_generateRandomString(10)}"),
+              null, null, null, null),
+        ],
+        null,
+      );
+    } catch (e) {
+      throw AIUnsupportedLocationException();
+    }
   }
 
   String _generateRandomString(int length) {

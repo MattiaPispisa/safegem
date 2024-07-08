@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:safegem/application/application.dart';
 import 'package:safegem/injection.dart';
 
+/// [BlocProvider] with [SpeechRecognizerBloc]
 class SpeechRecognizerProvider extends StatelessWidget {
   const SpeechRecognizerProvider({
     super.key,
@@ -20,6 +21,7 @@ class SpeechRecognizerProvider extends StatelessWidget {
   }
 }
 
+/// [BlocConsumer] with [SpeechRecognizerBloc]
 class SpeechRecognizerConsumer extends StatelessWidget {
   const SpeechRecognizerConsumer({
     super.key,
@@ -45,6 +47,7 @@ class SpeechRecognizerConsumer extends StatelessWidget {
   }
 }
 
+/// [BlocBuilder] with [SpeechRecognizerBloc]
 class SpeechRecognizerBuilder extends StatelessWidget {
   const SpeechRecognizerBuilder({
     super.key,
@@ -64,6 +67,7 @@ class SpeechRecognizerBuilder extends StatelessWidget {
   }
 }
 
+/// [BlocSelector] with [SpeechRecognizerBloc]
 class SpeechRecognizerSelector<T> extends StatelessWidget {
   const SpeechRecognizerSelector({
     super.key,
@@ -86,6 +90,7 @@ class SpeechRecognizerSelector<T> extends StatelessWidget {
   }
 }
 
+/// [builder] with [SpeechRecognizerState.isListening]
 class SpeechRecognizerIsListening extends StatelessWidget {
   const SpeechRecognizerIsListening({
     super.key,
@@ -106,6 +111,7 @@ class SpeechRecognizerIsListening extends StatelessWidget {
   }
 }
 
+/// [BlocListener] with [SpeechRecognizerBloc]
 class SpeechRecognizerListener extends StatelessWidget {
   const SpeechRecognizerListener({
     super.key,
@@ -134,6 +140,7 @@ class SpeechRecognizerListener extends StatelessWidget {
   }
 }
 
+/// run [onListening] on [SpeechRecognizerState.isListening] change
 class SpeechRecognizerOnStartListening extends StatelessWidget {
   const SpeechRecognizerOnStartListening({
     super.key,

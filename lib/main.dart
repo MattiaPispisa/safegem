@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:safegem/application/application.dart';
 import 'package:safegem/bootstrap.dart';
 import 'package:safegem/injection.dart';
 import 'package:safegem/l10n/app_localizations.dart';
@@ -28,8 +26,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<UserSettingsCubit>(),
+    return UserSettingsProvider(
       child: UserTheme(
         builder: (context, theme) {
           return MaterialApp.router(

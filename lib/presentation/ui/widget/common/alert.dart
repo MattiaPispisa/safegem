@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
 
+/// Create a widget to display alerts and error messages.
 class Alert extends StatelessWidget {
   const Alert({
     super.key,

@@ -3,6 +3,11 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:safegem/injection.dart';
 
+/// application bootstrap:
+/// - [HydratedBloc]
+/// - [configureDependencies]
+///
+/// then [runApp] callback
 void bootstrap({
   required Widget Function() then,
 }) async {
@@ -11,6 +16,7 @@ void bootstrap({
   HydratedBloc.storage =
       await HydratedStorage.build(storageDirectory: storageDirectory);
 
-  await configureDependencies(String.fromEnvironment('ENVIRONMENT',defaultValue: "develop"));
+  await configureDependencies(
+      String.fromEnvironment('ENVIRONMENT', defaultValue: "develop"));
   runApp(then());
 }

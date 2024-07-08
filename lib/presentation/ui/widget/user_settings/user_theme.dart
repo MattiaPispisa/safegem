@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:safegem/application/user_settings/user_settings_cubit.dart';
 import 'package:safegem/presentation/ui/theme/app_theme.dart';
 
+/// From [UserSettingsState] compute the app [ThemeData]
 class UserTheme extends StatelessWidget {
   const UserTheme({
     super.key,
