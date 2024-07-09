@@ -2,12 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:safegem/presentation/ui/theme/colors.dart';
 import 'package:safegem/presentation/ui/theme/spacing.dart';
 
+/// Theme extension for application
+///
+/// Contains:
+/// - [AppColors] colors
+/// - [AppSpacing] spacing
 class AppTheme extends ThemeExtension<AppTheme> {
+  /// constructor
   const AppTheme({
     required this.colors,
     required this.spacing,
   });
 
+  /// [AppTheme] light version
   factory AppTheme.light() {
     return AppTheme(
       colors: AppColors.light(),
@@ -15,6 +22,7 @@ class AppTheme extends ThemeExtension<AppTheme> {
     );
   }
 
+  /// [AppTheme] dark version
   factory AppTheme.dark() {
     return AppTheme(
       colors: AppColors.dark(),
@@ -22,7 +30,10 @@ class AppTheme extends ThemeExtension<AppTheme> {
     );
   }
 
+  /// colors
   final AppColors colors;
+
+  /// spacing
   final AppSpacing spacing;
 
   @override

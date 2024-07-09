@@ -8,14 +8,18 @@ import 'package:safegem/domain/domain.dart';
 part 'user_settings_state.dart';
 part 'user_settings_cubit.g.dart';
 
+/// Business logic to handle and persist user settings
 @injectable
 class UserSettingsCubit extends HydratedCubit<UserSettingsState> {
+  /// constructor
   UserSettingsCubit() : super(UserSettingsState.initial());
 
+  /// switch brightness
   void toggleDarkMode() {
     emit(state.copyWith(darkMode: !state.darkMode));
   }
 
+  /// change app color
   void setColor(AppColor color) {
     emit(state.copyWith(selectedColor: color));
   }

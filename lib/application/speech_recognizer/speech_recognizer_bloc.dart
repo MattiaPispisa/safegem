@@ -9,15 +9,21 @@ import 'package:safegem/domain/domain.dart';
 part 'speech_recognizer_event.dart';
 part 'speech_recognizer_state.dart';
 
+/// Business logic to recognize speech and convert it in text
 @injectable
 class SpeechRecognizerBloc
     extends Bloc<SpeechRecognizerEvent, SpeechRecognizerState> {
+  /// constructor
   SpeechRecognizerBloc(this._speechRecognizerService)
-      : super(SpeechRecognizerState.initial()) {
+      : super(
+          SpeechRecognizerState.initial(
+            isAvailable: _speechRecognizerService.available(),
+          ),
+        ) {
     on<SpeechRecognizerStarted>(_onSpeechStarted);
     on<SpeechRecognizerEnd>(_onSpeechEnd);
     on<SpeechRecognizerToggledSpeech>(_onToggleSpeech);
-    on<SpeechRecognizerRecognized>(_onRecognized);
+    on<_SpeechRecognizerRecognized>(_onRecognized);
   }
 
   final SpeechRecognizerService _speechRecognizerService;
@@ -31,7 +37,7 @@ class SpeechRecognizerBloc
     }
     emit(state.copyWith(isListening: true));
     _speechRecognizerService
-        .listen((result) => add(SpeechRecognizerRecognized(result: result)));
+        .listen((result) => add(_SpeechRecognizerRecognized(result: result)));
   }
 
   FutureOr<void> _onSpeechEnd(
@@ -44,7 +50,6 @@ class SpeechRecognizerBloc
       ),
     );
     _speechRecognizerService.stop();
-    
   }
 
   @override
@@ -65,18 +70,18 @@ class SpeechRecognizerBloc
   }
 
   FutureOr<void> _onRecognized(
-    SpeechRecognizerRecognized event,
+    _SpeechRecognizerRecognized event,
     Emitter<SpeechRecognizerState> emit,
   ) async {
     final result = event.result;
 
-   
-
     if (!result.finalResult) {
-      return emit(state.copyWith(
-        recognizedWords: result.recognizedWords,
-        isListening: true,
-      ),);
+      return emit(
+        state.copyWith(
+          recognizedWords: result.recognizedWords,
+          isListening: true,
+        ),
+      );
     }
 
     emit(
@@ -85,7 +90,7 @@ class SpeechRecognizerBloc
         isListening: false,
         optionOrMessageRecognized: some(
           UserMessage(
-            message: result.recognizedWords,
+            content: result.recognizedWords,
           ),
         ),
       ),

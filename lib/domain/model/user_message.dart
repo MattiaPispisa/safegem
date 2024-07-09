@@ -1,12 +1,15 @@
 import 'package:equatable/equatable.dart';
 
+/// An user message
 class UserMessage extends Equatable {
+  /// constructor
   const UserMessage({
-    required this.message,
+    required this.content,
   });
 
-  final String message;
+  /// user message content
+  final String content;
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [content];
 }

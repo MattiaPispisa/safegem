@@ -1,4 +1,7 @@
+/// Uri extension to create default uri schema
+/// useful for this app
 extension UriHelper on Uri {
+  /// sms schema
   static Uri sms({
     required String message,
     required String number,
@@ -12,6 +15,7 @@ extension UriHelper on Uri {
     );
   }
 
+  /// phone schema
   static Uri phone({
     required String number,
   }) {

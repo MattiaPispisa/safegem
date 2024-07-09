@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
+/// Application colors
 class AppColors extends ThemeExtension<AppColors> {
+  /// constructor
   const AppColors({
     required this.warning,
     required this.neutral,
   });
 
+  /// [AppColors] for light
   factory AppColors.light() {
     return const AppColors(
       warning: Colors.amber,
@@ -27,6 +30,7 @@ class AppColors extends ThemeExtension<AppColors> {
     );
   }
 
+  /// [AppColors] for dark
   factory AppColors.dark() {
     return const AppColors(
       warning: Colors.amber,
@@ -48,7 +52,10 @@ class AppColors extends ThemeExtension<AppColors> {
     );
   }
 
+  /// useful for showing warning messages
   final MaterialColor warning;
+
+  /// neutral colors useful for background, containers, ...
   final MaterialColor neutral;
 
   @override
@@ -73,6 +80,7 @@ class AppColors extends ThemeExtension<AppColors> {
     );
   }
 
+  /// iterate over every swatch property
   MaterialColor _lerpMaterialColor(
     MaterialColor a,
     MaterialColor? b,

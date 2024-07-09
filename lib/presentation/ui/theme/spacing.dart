@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 
+/// Application spacing
 class AppSpacing extends ThemeExtension<AppSpacing> {
-  const AppSpacing({this.unit = 8});
+  /// constructor
+  const AppSpacing({
+    this.unit = 8,
+  });
 
+  /// unit (default **8**)
   final double unit;
 
+  /// unit / 2 (default **4**)
   double get s => unit / 2;
+
+  /// unit (default **8**)
   double get m => unit;
+
+  /// unit * 2 (default **16**)
   double get l => unit * 2;
 
+  /// unit * 2 (default **16*+)
   double get between => unit * 2;
 
   @override
