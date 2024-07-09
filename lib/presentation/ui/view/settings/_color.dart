@@ -3,13 +3,25 @@ import 'package:safegem/presentation/ui/extension/extension.dart';
 
 import 'package:safegem/presentation/ui/widget/widget.dart';
 
+const _kButtonSize = 30.0;
+
+/// A circular colored button
 class SelectableColor extends StatelessWidget {
+  /// constructor
   const SelectableColor({
-    required this.selected, required this.color, required this.onTap, super.key,
+    required this.selected,
+    required this.color,
+    required this.onTap,
+    super.key,
   });
 
+  /// selected
   final bool selected;
+
+  /// color
   final MaterialColor color;
+
+  /// on tap callback
   final VoidCallback onTap;
 
   @override
@@ -24,8 +36,8 @@ class SelectableColor extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(3),
           child: Container(
-            height: 30,
-            width: 30,
+            height: _kButtonSize,
+            width: _kButtonSize,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: color,

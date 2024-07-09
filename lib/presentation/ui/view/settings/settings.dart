@@ -4,7 +4,9 @@ import 'package:safegem/application/application.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
 import 'package:safegem/presentation/ui/view/settings/_color.dart';
 
+/// settings view
 class SettingsView extends StatelessWidget {
+  /// constructor
   const SettingsView({super.key});
 
   void _setPrimaryColor(BuildContext context, AppColor color) {

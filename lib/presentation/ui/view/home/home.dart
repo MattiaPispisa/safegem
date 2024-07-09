@@ -7,9 +7,11 @@ import 'package:safegem/presentation/ui/view/home/_gem_glow.dart';
 import 'package:safegem/presentation/ui/view/home/_provider.dart';
 import 'package:safegem/presentation/ui/view/home/_recognized_text.dart';
 import 'package:safegem/presentation/ui/view/home/_sender.dart';
-import 'package:safegem/presentation/ui/view/home/_speech_to_emergnecy.dart';
+import 'package:safegem/presentation/ui/view/home/_speech_to_emergency.dart';
 
+/// Home view
 class HomeView extends StatelessWidget {
+  /// constructor
   const HomeView({super.key});
 
   @override

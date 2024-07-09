@@ -1,4 +1,4 @@
-import 'app_localizations.dart';
+import 'package:safegem/l10n/app_localizations.dart';
 
 /// The translations for English (`en`).
 class AppLocalizationsEn extends AppLocalizations {

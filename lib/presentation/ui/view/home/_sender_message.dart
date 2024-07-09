@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:safegem/domain/domain.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
 
+/// Displays the [emergencyMessage] inside a container.
+/// If the message becomes too long, it can scroll.
 class SenderMessage extends StatelessWidget {
+  /// constructor
   const SenderMessage({
-    required this.emergencyMessage, super.key,
+    required this.emergencyMessage,
+    super.key,
   });
 
+  /// emergency message
   final EmergencyMessage emergencyMessage;
 
   @override
@@ -52,24 +57,26 @@ class SenderMessage extends StatelessWidget {
 
   Widget _number(BuildContext context) {
     return Text.rich(
-      TextSpan(children: [
-        TextSpan(
-          text: '${context.t().to}: ',
-          style: context
-              .theme()
-              .textTheme
-              .bodyMedium
-              ?.copyWith(color: context.theme().app.colors.neutral.shade500),
-        ),
-        TextSpan(
-          text: emergencyMessage.authorityNumber,
-          style: context
-              .theme()
-              .textTheme
-              .bodyMedium
-              ?.copyWith(fontWeight: FontWeight.bold),
-        ),
-      ],),
+      TextSpan(
+        children: [
+          TextSpan(
+            text: '${context.t().to}: ',
+            style: context
+                .theme()
+                .textTheme
+                .bodyMedium
+                ?.copyWith(color: context.theme().app.colors.neutral.shade500),
+          ),
+          TextSpan(
+            text: emergencyMessage.authorityNumber,
+            style: context
+                .theme()
+                .textTheme
+                .bodyMedium
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     );
   }
 }

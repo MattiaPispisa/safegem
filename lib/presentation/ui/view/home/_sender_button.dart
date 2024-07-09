@@ -4,11 +4,17 @@ import 'package:safegem/presentation/ui/extension/extension.dart';
 import 'package:safegem/presentation/ui/view/home/_sender_constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/// A button used to send the [emergencyMessage]
+///
+/// Currently [launchUrl] is used to handle the sms.
 class SenderButton extends StatelessWidget {
+  /// constructor
   const SenderButton({
-    required this.emergencyMessage, super.key,
+    required this.emergencyMessage,
+    super.key,
   });
 
+  /// emergency message
   final EmergencyMessage emergencyMessage;
 
   void _onPressed() {

@@ -1,7 +1,5 @@
 {
   "dart.flutterSdkPath": ".fvm/versions/stable",
-  "cSpell.words": [
-    "lerp",
-    "safegem"
-  ]
+  "cSpell.words": ["dartz", "lerp", "safegem", "lerp"],
+  "cSpell.language": "en, it"
 }

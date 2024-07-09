@@ -3,10 +3,13 @@ import 'package:safegem/presentation/ui/extension/extension.dart';
 
 /// Create a widget to display alerts and error messages.
 class Alert extends StatelessWidget {
+  /// constructor
   const Alert({
-    required this.child, super.key,
+    required this.child,
+    super.key,
   });
 
+  /// child
   final Widget child;
 
   @override
@@ -19,7 +22,7 @@ class Alert extends StatelessWidget {
         color: appTheme.colors.warning,
       ),
       child: Padding(
-        padding:  EdgeInsets.all(appTheme.spacing.m),
+        padding: EdgeInsets.all(appTheme.spacing.m),
         child: child,
       ),
     );

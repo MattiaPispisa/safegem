@@ -4,8 +4,12 @@ import 'package:injectable/injectable.dart';
 import 'package:safegem/presentation/ui/view/view.dart';
 import 'package:safegem/presentation/ui/widget/handler/handler.dart';
 
+/// Application router config
+///
+/// Under the hood the routing is handled via `go_router`
 @module
 abstract class RouterConfigModule {
+  /// router
   @lazySingleton
   RouterConfig<Object> get router {
     return GoRouter(

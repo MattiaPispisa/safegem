@@ -6,7 +6,11 @@ import 'package:safegem/application/application.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
 import 'package:safegem/presentation/ui/widget/widget.dart';
 
+/// Using [SpeechRecognizerState.isListening] animate the [GemGlow].
+///
+/// On tap call [SpeechRecognizerToggledSpeech]
 class BlocGemGlow extends StatelessWidget {
+  /// constructor
   const BlocGemGlow({super.key});
 
   void _onTap(BuildContext context) {
@@ -26,12 +30,19 @@ class BlocGemGlow extends StatelessWidget {
   }
 }
 
+/// An animated avatar used to indicate when the application is listening.
 class GemGlow extends StatelessWidget {
+  /// constructor
   const GemGlow({
-    required this.animated, required this.onTap, super.key,
+    required this.animated,
+    required this.onTap,
+    super.key,
   });
 
+  /// on tap callback
   final VoidCallback onTap;
+
+  /// if is to animate
   final bool animated;
 
   @override

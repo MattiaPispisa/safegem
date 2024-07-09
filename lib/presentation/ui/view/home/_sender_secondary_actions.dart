@@ -6,11 +6,18 @@ import 'package:safegem/presentation/ui/view/home/_sender_constants.dart';
 import 'package:safegem/presentation/ui/widget/widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+const _kSecondaryActionHeight = 28.0;
+
+/// Contains all possible secondary actions for the emergency message,
+/// such as the option to call the emergency number.
 class SenderSecondaryActions extends StatelessWidget {
+  /// constructor
   const SenderSecondaryActions({
-    required this.emergencyMessage, super.key,
+    required this.emergencyMessage,
+    super.key,
   });
 
+  /// emergency message
   final EmergencyMessage emergencyMessage;
 
   @override
@@ -41,7 +48,7 @@ class SenderSecondaryActions extends StatelessWidget {
     );
 
     return SizedBox(
-      height: 28,
+      height: _kSecondaryActionHeight,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: buttons.length,

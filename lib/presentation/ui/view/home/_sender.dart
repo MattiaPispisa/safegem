@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:safegem/application/application.dart';
 import 'package:safegem/domain/domain.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
 import 'package:safegem/presentation/ui/view/home/_sender_button.dart';
@@ -7,7 +8,10 @@ import 'package:safegem/presentation/ui/view/home/_sender_message.dart';
 import 'package:safegem/presentation/ui/view/home/_sender_secondary_actions.dart';
 import 'package:safegem/presentation/ui/widget/widget.dart';
 
+/// Using [SenderBloc] create the animation
+/// to display and hide [Sender]
 class BlocSender extends StatefulWidget {
+  /// constructor
   const BlocSender({super.key});
 
   @override
@@ -53,10 +57,16 @@ class _BlocSenderState extends State<BlocSender>
   }
 }
 
+/// Contains the emergency message and all
+/// possible actions related to the message.
 class Sender extends StatelessWidget {
+  /// constructor
   const Sender({
-    required this.emergencyMessage, super.key,
+    required this.emergencyMessage,
+    super.key,
   });
+
+  /// emergency message
   final EmergencyMessage emergencyMessage;
 
   @override
@@ -98,7 +108,8 @@ class Sender extends StatelessWidget {
 
 class _SenderContainer extends StatelessWidget {
   const _SenderContainer({
-    required this.child, super.key,
+    required this.child,
+    super.key,
   });
 
   final Widget child;
@@ -126,4 +137,3 @@ class _SenderContainer extends StatelessWidget {
     );
   }
 }
-

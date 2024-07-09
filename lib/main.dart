@@ -8,7 +8,9 @@ void main() {
   bootstrap(then: () => const MyApp());
 }
 
+/// Entry point
 class MyApp extends StatefulWidget {
+  /// constructor
   const MyApp({super.key});
 
   @override
@@ -20,6 +22,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+    // to not recreate router on hot reload 
     _routerConfig = getIt<RouterConfig<Object>>();
     super.initState();
   }

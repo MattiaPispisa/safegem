@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:safegem/application/application.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
 import 'package:safegem/presentation/ui/widget/widget.dart';
 
+/// Using [EmergencyComposerState.composingMessage] and [SpeechRecognizerState]
+/// return the [RecognizedText].
+///
+/// More info about text on [RecognizedText]
 class BlocRecognizedText extends StatelessWidget {
+  /// constructor
   const BlocRecognizedText({super.key});
 
   @override
@@ -25,13 +31,25 @@ class BlocRecognizedText extends StatelessWidget {
   }
 }
 
+/// - if is listening text is animated;
+/// - if is computing the emergency message then a shimmer effect is created;
+/// - else a static text is displayed
 class RecognizedText extends StatelessWidget {
+  /// constructor
   const RecognizedText({
-    required this.composingMessage, required this.listening, required this.recognizedWords, super.key,
+    required this.composingMessage,
+    required this.listening,
+    required this.recognizedWords,
+    super.key,
   });
 
+  /// is composing message
   final bool composingMessage;
+
+  /// is listening speech
   final bool listening;
+
+  /// current recognized words
   final String recognizedWords;
 
   @override
