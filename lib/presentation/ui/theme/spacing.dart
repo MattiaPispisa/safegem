@@ -22,6 +22,9 @@ class AppSpacing extends ThemeExtension<AppSpacing> {
   /// unit * 2 (default **16*+)
   double get between => unit * 2;
 
+  /// unit * 2 (default **16*+)
+  double get horizontal => unit * 2;
+
   @override
   ThemeExtension<AppSpacing> copyWith({
     double? unit,

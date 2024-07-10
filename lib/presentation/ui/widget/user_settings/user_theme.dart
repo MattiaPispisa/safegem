@@ -6,7 +6,8 @@ import 'package:safegem/presentation/ui/theme/app_theme.dart';
 /// From [UserSettingsState] compute the app [ThemeData]
 class UserTheme extends StatelessWidget {
   const UserTheme({
-    required this.builder, super.key,
+    required this.builder,
+    super.key,
   });
 
   final Widget Function(BuildContext context, ThemeData theme) builder;
@@ -45,6 +46,8 @@ class UserTheme extends StatelessWidget {
     AppTheme appTheme,
     UserSettingsState state,
   ) {
+    final primaryColor = state.materialColor;
+
     const iconTheme = IconThemeData(
       size: 20,
     );
@@ -56,10 +59,29 @@ class UserTheme extends StatelessWidget {
         fontSize: 18,
       ),
     );
+    final inputBorder = OutlineInputBorder(
+      borderSide: BorderSide(
+        color: primaryColor,
+      ),
+    );
+    final inputDecorationTheme = theme.inputDecorationTheme.copyWith(
+      border: inputBorder,
+      hoverColor: primaryColor,
+      fillColor: primaryColor,
+      focusColor: primaryColor,
+      focusedBorder: inputBorder,
+      enabledBorder: inputBorder,
+    );
 
     return theme.copyWith(
       scaffoldBackgroundColor: appTheme.colors.neutral.shade50,
       textTheme: textTheme,
+      textSelectionTheme: TextSelectionThemeData(
+        selectionColor: primaryColor,
+        cursorColor: primaryColor,
+        selectionHandleColor: primaryColor,
+      ),
+      inputDecorationTheme: inputDecorationTheme,
       appBarTheme: AppBarTheme(
         iconTheme: theme.iconTheme.copyWith(
           color: appTheme.colors.neutral.shade900,
@@ -69,7 +91,7 @@ class UserTheme extends StatelessWidget {
         elevation: 0,
       ),
       iconTheme: iconTheme,
-      primaryColor: state.materialColor,
+      primaryColor: primaryColor,
       extensions: [
         appTheme,
       ],
