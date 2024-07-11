@@ -1,26 +1,38 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
-import '_section_header.dart';
+import 'package:safegem/presentation/ui/view/settings/_section_header.dart';
 
+/// define the structure of a settings section.
+///
+/// this is used to build the [SettingsSkeleton]
 class SettingsSection {
+  /// constructor
   const SettingsSection({
     required this.title,
-     this.headerTrailing,
     required this.content,
+    this.headerTrailing,
   });
 
+  /// section title
   final String title;
+
+  /// optional widget on [title] end
   final Widget? headerTrailing;
+
+  /// section content
   final Widget content;
 }
 
+/// iterator over [sections] to build settings
 class SettingsSkeleton extends StatelessWidget {
+  /// constructor
   const SettingsSkeleton({
-    super.key,
     required this.sections,
+    super.key,
   });
 
+  /// settings sections
   final List<SettingsSection> sections;
 
   List<Widget> _sectionWidgets(

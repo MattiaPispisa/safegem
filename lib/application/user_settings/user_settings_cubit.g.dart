@@ -27,6 +27,9 @@ Map<String, dynamic> _$UserSettingsStateToJson(UserSettingsState instance) =>
 
 const _$AppColorEnumMap = {
   AppColor.blue: 'blue',
-  AppColor.violet: 'violet',
   AppColor.green: 'green',
+  AppColor.gold: 'gold',
+  AppColor.pink: 'pink',
+  AppColor.orange: 'orange',
+  AppColor.violet: 'violet',
 };

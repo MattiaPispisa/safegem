@@ -23,6 +23,7 @@ class SenderSecondaryActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme();
+    final emergencyContacts = context.emergencyContacts();
 
     final buttons = [
       ChipButton(
@@ -39,6 +40,18 @@ class SenderSecondaryActions extends StatelessWidget {
         iconColor: theme.primaryColor,
         onPressed: () {
           launchUrl(emergencyMessage.phone);
+        },
+      ),
+      ...emergencyContacts.map(
+        (contact) {
+          return ChipButton(
+            iconData: kIconSend,
+            text: contact.displayName,
+            iconColor: Colors.red,
+            onPressed: () {
+              launchUrl(UriHelper.phone(number: contact.number));
+            },
+          );
         },
       ),
     ];

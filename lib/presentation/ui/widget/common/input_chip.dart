@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
 
+/// A little rounder button with an [iconData] and [text]
 class ChipButton extends StatelessWidget {
-  const ChipButton(
-      {required this.iconData, required this.text, super.key,
-      this.iconColor,
-      this.onPressed,});
+  /// constructor
+  const ChipButton({
+    required this.iconData,
+    required this.text,
+    super.key,
+    this.iconColor,
+    this.onPressed,
+  });
 
+  /// iconData displayed before [text]
   final IconData iconData;
+
+  /// [iconData] color
   final Color? iconColor;
+
+  /// button text
   final String text;
+
+  /// callback on tap chip button
   final VoidCallback? onPressed;
 
   @override
@@ -18,7 +30,7 @@ class ChipButton extends StatelessWidget {
     return InputChip(
       elevation: 0,
       pressElevation: 0,
-      padding: const EdgeInsets.all(0),
+      padding: EdgeInsets.zero,
       labelPadding: EdgeInsets.symmetric(
         horizontal: theme.spacing.m,
       ),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:safegem/application/application.dart';
 import 'package:safegem/domain/domain.dart';
 import 'package:safegem/presentation/ui/extension/extension.dart';
 import 'package:safegem/presentation/ui/view/settings/_color.dart';
+import 'package:safegem/presentation/ui/view/settings/_emergency_contact_card.dart';
+import 'package:safegem/presentation/ui/view/settings/_emergency_contact_delete_dialog.dart';
 import 'package:safegem/presentation/ui/view/settings/_emergency_contact_dialog.dart';
 import 'package:safegem/presentation/ui/view/settings/_skeleton.dart';
-import 'package:safegem/presentation/ui/widget/widget.dart';
 
 /// settings view
 class SettingsView extends StatelessWidget {
@@ -144,80 +144,11 @@ class SettingsView extends StatelessWidget {
       },
       itemBuilder: (context, index) {
         final contact = emergencyContacts[index];
-        return InkWell(
+        return EmergencyContactCard(
+          contact: contact,
           onTap: () => _onPressedEditContact(context, contact: contact),
-          borderRadius: BorderRadius.circular(theme.app.spacing.m),
-          child: Ink(
-            decoration: BoxDecoration(
-              color: theme.app.colors.neutral.shade100,
-              borderRadius: BorderRadius.circular(theme.app.spacing.m),
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(theme.app.spacing.l),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          contact.displayName,
-                          style: theme.textTheme.titleLarge,
-                          maxLines: 1,
-                        ),
-                        SizedBox(height: theme.app.spacing.s),
-                        Text(
-                          contact.number,
-                          style: theme.textTheme.bodyLarge,
-                          maxLines: 1,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: theme.app.spacing.m),
-                  IconButton(
-                    padding: EdgeInsets.zero,
-                    visualDensity: VisualDensity.compact,
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                    ),
-                    onPressed: () => {
-                      AppBottomSheet.show(
-                        context,
-                        title: context.t().delete,
-                        builder: (_) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Text(
-                                context
-                                    .t()
-                                    .sureRemoveContact(contact.displayName),
-                              ),
-                              SizedBox(height: theme.app.spacing.beforeAction),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.red,
-                                ),
-                                onPressed: () {
-                                  context
-                                      .read<UserSettingsCubit>()
-                                      .removeEmergencyContact(contact);
-                                  context.pop();
-                                },
-                                child: Text(context.t().delete),
-                              )
-                            ],
-                          );
-                        },
-                      )
-                    },
-                  )
-                ],
-              ),
-            ),
-          ),
+          onTapDelete: () =>
+              showEmergencyContactDeleteDialog(context, contact: contact),
         );
       },
       shrinkWrap: true,

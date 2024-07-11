@@ -5,13 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart' as g;
 import 'package:safegem/domain/model/model.dart';
 
+/// Listen the app location and persist the last state.
+///
+/// last state can be retrieved using [LocationHandler.of]
+///
+/// last state can be observed using [ValueListenableBuilder].
+/// [LastKnowLocationBuilder] observe the last state and
+/// expose a builder method
 class LocationHandler extends StatefulWidget {
+  /// constructor
   const LocationHandler({
-    required this.child, super.key,
+    required this.child,
+    super.key,
   });
 
+  /// child
   final Widget child;
 
+  /// retrieve [LocationHandlerState]
   static LocationHandlerState of(BuildContext context) {
     return context.findAncestorStateOfType<LocationHandlerState>()!;
   }
@@ -20,11 +31,16 @@ class LocationHandler extends StatefulWidget {
   State<LocationHandler> createState() => LocationHandlerState();
 }
 
+/// state of [LocationHandler]
+///
+/// use [LocationHandlerState.lastKnowLocation]
+/// to observe the last state
 class LocationHandlerState extends State<LocationHandler> {
   var _permissionGranted = false;
   StreamSubscription<Location>? _positionSubscription;
   late ValueNotifier<Location?> _lastKnownLocation;
 
+  /// last location state
   ValueListenable<Location?> get lastKnowLocation => _lastKnownLocation;
 
   @override
@@ -110,11 +126,15 @@ class LocationHandlerState extends State<LocationHandler> {
   }
 }
 
+/// observe the last connectivity state of [LocationHandler]
 class LastKnowLocationBuilder extends StatelessWidget {
+  /// constructor
   const LastKnowLocationBuilder({
-    required this.builder, super.key,
+    required this.builder,
+    super.key,
   });
 
+    /// build a widget using last location
   final Widget Function(
     BuildContext context,
     Location? location,
