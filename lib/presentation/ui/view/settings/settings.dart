@@ -28,7 +28,7 @@ class SettingsView extends StatelessWidget {
       emergencyContact: null,
       onDone: (emergencyContact) => context
           .read<UserSettingsCubit>()
-          .handleEmergencyContact(emergencyContact),
+          .addEmergencyContact(emergencyContact),
     );
   }
 
@@ -41,7 +41,7 @@ class SettingsView extends StatelessWidget {
       emergencyContact: contact,
       onDone: (emergencyContact) => context
           .read<UserSettingsCubit>()
-          .handleEmergencyContact(emergencyContact),
+          .editEmergencyContact(contact, emergencyContact),
     );
   }
 

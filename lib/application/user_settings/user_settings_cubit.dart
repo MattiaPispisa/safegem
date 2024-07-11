@@ -24,19 +24,25 @@ class UserSettingsCubit extends HydratedCubit<UserSettingsState> {
     emit(state.copyWith(selectedColor: color));
   }
 
-  /// add or update [contact] in [UserSettingsState.emergencyContacts]
-  void handleEmergencyContact(EmergencyContact contact) {
-    final emergencyContacts = List.of(state.emergencyContacts);
-    final index = state.emergencyContacts.indexOf(contact);
+  /// add [contact] in [UserSettingsState.emergencyContacts]
+  void addEmergencyContact(EmergencyContact contact) {
+    final emergencyContacts = List.of(state.emergencyContacts)..add(contact);
 
-    // new
+    emit(state.copyWith(emergencyContacts: emergencyContacts));
+  }
+
+  ///  update [contact] in [UserSettingsState.emergencyContacts]
+  void editEmergencyContact(
+    EmergencyContact previous,
+    EmergencyContact contact,
+  ) {
+    final emergencyContacts = List.of(state.emergencyContacts);
+    final index = state.emergencyContacts.indexOf(previous);
+
     if (index < 0) {
-      emergencyContacts.add(contact);
+      return;
     }
-    // edit
-    else {
-      emergencyContacts[index] = contact;
-    }
+    emergencyContacts[index] = contact;
 
     emit(state.copyWith(emergencyContacts: emergencyContacts));
   }
