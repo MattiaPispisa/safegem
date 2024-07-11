@@ -42,4 +42,33 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unsupportedSpeechRecognizer => 'Sorry, but the service for recognizing text from voice is not supported.';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get insertName => 'Insert name';
+
+  @override
+  String get phone => 'Phone';
+
+  @override
+  String get insertValidPhone => 'Insert a valid phone';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get emergencyContact => 'Emergency Contact';
+
+  @override
+  String sureRemoveContact(Object name) {
+    return 'Are you sure you want to delete $name\'s emergency contact?';
+  }
 }

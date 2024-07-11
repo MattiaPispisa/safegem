@@ -57,11 +57,12 @@ class EmergencyContactBloc
   FutureOr<void> _onSubmit(
     EmergencyContactSubmitted event,
     Emitter<EmergencyContactState> emit,
-  ) {
+  ) async {
     if (_isStateNotValid) {
       emit(
         state.copyWith(showError: true),
       );
+      return;
     }
 
     emit(

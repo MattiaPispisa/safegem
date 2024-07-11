@@ -64,13 +64,24 @@ class UserTheme extends StatelessWidget {
         color: primaryColor,
       ),
     );
+    final errorBorder = OutlineInputBorder(
+      borderSide: BorderSide(
+        color: appTheme.colors.warning,
+      ),
+    );
     final inputDecorationTheme = theme.inputDecorationTheme.copyWith(
+      suffixIconColor: primaryColor,
+      prefixIconColor: primaryColor,
+      iconColor: primaryColor,
       border: inputBorder,
       hoverColor: primaryColor,
       fillColor: primaryColor,
       focusColor: primaryColor,
       focusedBorder: inputBorder,
       enabledBorder: inputBorder,
+      focusedErrorBorder: errorBorder,
+      errorBorder: errorBorder,
+      errorStyle: TextStyle(color: appTheme.colors.warning),
     );
 
     return theme.copyWith(
@@ -89,6 +100,12 @@ class UserTheme extends StatelessWidget {
         titleTextStyle: textTheme.titleMedium,
         backgroundColor: appTheme.colors.neutral.shade50,
         elevation: 0,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          elevation: 0,
+          backgroundColor: primaryColor,
+        ),
       ),
       iconTheme: iconTheme,
       primaryColor: primaryColor,

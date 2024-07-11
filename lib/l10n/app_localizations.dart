@@ -168,6 +168,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sorry, but the service for recognizing text from voice is not supported.'**
   String get unsupportedSpeechRecognizer;
+
+  /// No description provided for @name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get name;
+
+  /// No description provided for @insertName.
+  ///
+  /// In en, this message translates to:
+  /// **'Insert name'**
+  String get insertName;
+
+  /// No description provided for @phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get phone;
+
+  /// No description provided for @insertValidPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Insert a valid phone'**
+  String get insertValidPhone;
+
+  /// No description provided for @add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get add;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @emergencyContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency Contact'**
+  String get emergencyContact;
+
+  /// No description provided for @sureRemoveContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete {name}\'s emergency contact?'**
+  String sureRemoveContact(Object name);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

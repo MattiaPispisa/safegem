@@ -10,6 +10,7 @@ final class EmergencyContactState extends Equatable {
     required this.invalidNumber,
     required this.showError,
     required this.optionOrEmergencyContactCreated,
+    required this.editing,
   });
 
   /// [EmergencyContactBloc] initial state.
@@ -27,6 +28,7 @@ final class EmergencyContactState extends Equatable {
         invalidNumber: true,
         optionOrEmergencyContactCreated: none(),
         showError: false,
+        editing: false,
       );
     }
 
@@ -37,8 +39,12 @@ final class EmergencyContactState extends Equatable {
       invalidNumber: false,
       optionOrEmergencyContactCreated: none(),
       showError: false,
+      editing: true,
     );
   }
+
+  /// editing an emergency contact
+  final bool editing;
 
   /// contact name
   final String name;
@@ -77,6 +83,7 @@ final class EmergencyContactState extends Equatable {
       optionOrEmergencyContactCreated:
           optionOrEmergencyContactCreated ?? none(),
       showError: showError ?? this.showError,
+      editing: editing,
     );
   }
 
@@ -88,5 +95,6 @@ final class EmergencyContactState extends Equatable {
         invalidNumber,
         showError,
         optionOrEmergencyContactCreated,
+        editing,
       ];
 }

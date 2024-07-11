@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart' as m;
 import 'package:safegem/presentation/ui/extension/extension.dart';
+import 'package:safegem/presentation/ui/widget/common/common.dart';
 
 /// class that contains methods to handle bottom sheet.
 /// See [AppBottomSheet.show]
@@ -73,22 +74,25 @@ class _BottomSheetContainer extends StatelessWidget {
     final theme = context.appTheme();
     final viewInsets = MediaQuery.of(context).viewInsets;
 
-    return SingleChildScrollView(
-      controller: m.ModalScrollController.of(context),
-      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-      child: SafeArea(
-        child: Padding(
-          padding: viewInsets.copyWith(
-            top: viewInsets.top + _platformSpecificPadding,
-            bottom: theme.spacing.m + viewInsets.bottom,
-            left: theme.spacing.horizontal,
-            right: theme.spacing.horizontal,
-          ),
-          child: Column(
-            children: [
-              _appBar(context),
-              builder(context),
-            ],
+    return KeyboardDismiss(
+      child: SingleChildScrollView(
+        controller: m.ModalScrollController.of(context),
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: SafeArea(
+          child: Padding(
+            padding: viewInsets.copyWith(
+              top: viewInsets.top + _platformSpecificPadding,
+              bottom: theme.spacing.m + viewInsets.bottom,
+              left: theme.spacing.horizontal,
+              right: theme.spacing.horizontal,
+            ),
+            child: Column(
+              children: [
+                _appBar(context),
+                SizedBox(height: context.appTheme().spacing.m),
+                builder(context),
+              ],
+            ),
           ),
         ),
       ),
@@ -100,7 +104,14 @@ class _BottomSheetContainer extends StatelessWidget {
 
     return Row(
       children: [
-        Expanded(child: Text(title)),
+        Expanded(
+          child: Text(
+            title,
+            style: theme.textTheme.headlineSmall,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
         IconButton(
           onPressed: () {
             Navigator.of(context).pop();

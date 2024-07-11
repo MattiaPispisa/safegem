@@ -12,5 +12,19 @@
   "messageNotRecognized": "Sorry, I couldn't understand the message",
   "locationNotFound": "Sorry, I can't seem to determine your location.",
   "unsupportedLocation": "Sorry, but this service is currently not available in your region.",
-  "unsupportedSpeechRecognizer": "Sorry, but the service for recognizing text from voice is not supported."
+  "unsupportedSpeechRecognizer": "Sorry, but the service for recognizing text from voice is not supported.",
+  "name": "Name",
+  "insertName": "Insert name",
+  "phone": "Phone",
+  "insertValidPhone": "Insert a valid phone",
+  "add": "Add",
+  "edit": "Edit",
+  "delete": "Delete", 
+  "emergencyContact": "Emergency Contact",
+  "sureRemoveContact": "Are you sure you want to delete {name}'s emergency contact?",
+  "@sureRemoveContact": {
+    "placeholders": {
+      "name": {}
+    }
+  }
 }
