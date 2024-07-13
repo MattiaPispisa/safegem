@@ -1,9 +1,22 @@
 // ignore_for_file: lines_longer_than_80_chars
-
-import 'package:bloc/bloc.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:mocktail/mocktail.dart';
+
+class _MockStorage extends Mock implements Storage {}
+
+late Storage _hydratedStorage;
+
+/// init [HydratedBloc] with a mocked [Storage]
+void initHydratedStorage() {
+  _hydratedStorage = _MockStorage();
+  when(
+    () => _hydratedStorage.write(any(), any<dynamic>()),
+  ).thenAnswer((_) async {});
+  HydratedBloc.storage = _hydratedStorage;
+}
 
 /// a robot to make bloc test readable like natural language
 ///
@@ -95,17 +108,15 @@ class BlocStateRobotMatcher<T> {
 }
 
 @isTest
-void robotBlocTest<State>(
+void robotBlocTest<Robot extends BlocRobot<State>, State>(
   String description, {
-  required BlocRobot<State> Function() setUp,
-  List<BlocStateRobotMatcher<State>> Function(
-    BlocRobot<State> blocRobot,
-  )? expect,
-  void Function(BlocRobot<State> blocRobot)? act,
+  required Robot Function() setUp,
+  List<BlocStateRobotMatcher<State>> Function(Robot robot)? expect,
+  void Function(Robot robot)? act,
   int skip = 0,
   Duration wait = const Duration(seconds: 2),
 }) {
-  late BlocRobot<State> blocRobot;
+  late Robot blocRobot;
 
   return blocTest<BlocBase<State>, State>(
     description,

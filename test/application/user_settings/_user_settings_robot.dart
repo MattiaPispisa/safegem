@@ -9,6 +9,11 @@ class UserSettingsRobot extends BlocRobot<UserSettingsState> {
     return UserSettingsRobot._(UserSettingsCubit());
   }
 
+  /// setUpAll
+  static void setUpAll() {
+    initHydratedStorage();
+  }
+
   @override
   UserSettingsCubit bloc;
 
@@ -18,7 +23,14 @@ class UserSettingsRobot extends BlocRobot<UserSettingsState> {
   }
 
   @override
-  BlocStateRobotMatcher<UserSettingsState> get state => UserSettingsMatcher();
+  UserSettingsMatcher get state => UserSettingsMatcher();
 }
 
-class UserSettingsMatcher extends BlocStateRobotMatcher<UserSettingsState> {}
+class UserSettingsMatcher extends BlocStateRobotMatcher<UserSettingsState> {
+  UserSettingsMatcher havingDark(bool dark) {
+    add(
+      (state) => state.having((state) => state.darkMode, 'darkMode', dark),
+    );
+    return this;
+  }
+}

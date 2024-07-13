@@ -1,8 +1,11 @@
 {
   "dart.flutterSdkPath": ".fvm/versions/stable",
   "cSpell.words": [
+    "cupertino",
     "dartz",
+    "geolocator",
     "lerp",
+    "mocktail",
     "safegem",
     "unfocus"
   ],
