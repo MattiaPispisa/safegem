@@ -5,10 +5,13 @@ import 'package:safegem/injection.dart';
 
 /// [BlocProvider] with [SpeechRecognizerBloc]
 class SpeechRecognizerProvider extends StatelessWidget {
+  /// constructor
   const SpeechRecognizerProvider({
-    required this.child, super.key,
+    required this.child,
+    super.key,
   });
 
+  /// child
   final Widget child;
 
   @override
@@ -22,14 +25,20 @@ class SpeechRecognizerProvider extends StatelessWidget {
 
 /// [BlocConsumer] with [SpeechRecognizerBloc]
 class SpeechRecognizerConsumer extends StatelessWidget {
+  /// constructor
   const SpeechRecognizerConsumer({
-    required this.builder, required this.listener, super.key,
+    required this.builder,
+    required this.listener,
+    super.key,
   });
 
+  /// builder
   final Widget Function(
     BuildContext context,
     SpeechRecognizerState state,
   ) builder;
+
+  /// listener
   final void Function(
     BuildContext context,
     SpeechRecognizerState state,
@@ -46,10 +55,13 @@ class SpeechRecognizerConsumer extends StatelessWidget {
 
 /// [BlocBuilder] with [SpeechRecognizerBloc]
 class SpeechRecognizerBuilder extends StatelessWidget {
+  /// constructor
   const SpeechRecognizerBuilder({
-    required this.builder, super.key,
+    required this.builder,
+    super.key,
   });
 
+  /// builder
   final Widget Function(
     BuildContext context,
     SpeechRecognizerState state,
@@ -65,11 +77,19 @@ class SpeechRecognizerBuilder extends StatelessWidget {
 
 /// [BlocSelector] with [SpeechRecognizerBloc]
 class SpeechRecognizerSelector<T> extends StatelessWidget {
+  /// constructor
   const SpeechRecognizerSelector({
-    required this.selector, required this.builder, super.key,
+    required this.selector,
+    required this.builder,
+    super.key,
   });
 
-  final T Function(SpeechRecognizerState state) selector;
+  /// selector
+  final T Function(
+    SpeechRecognizerState state,
+  ) selector;
+
+  /// builder
   final Widget Function(
     BuildContext context,
     T state,
@@ -86,39 +106,53 @@ class SpeechRecognizerSelector<T> extends StatelessWidget {
 
 /// [builder] with [SpeechRecognizerState.isListening]
 class SpeechRecognizerIsListening extends StatelessWidget {
+  /// constructor
   const SpeechRecognizerIsListening({
-    required this.builder, super.key,
+    required this.builder,
+    super.key,
   });
 
+  /// builder with [SpeechRecognizerState.isListening]
   final Widget Function(
-    BuildContext context,
-    bool isListening,
-  ) builder;
+    BuildContext context, {
+    required bool isListening,
+  }) builder;
 
   @override
   Widget build(BuildContext context) {
     return BlocSelector<SpeechRecognizerBloc, SpeechRecognizerState, bool>(
       selector: (state) => state.isListening,
-      builder: builder,
+      builder: (context, isListening) => builder(
+        context,
+        isListening: isListening,
+      ),
     );
   }
 }
 
 /// [BlocListener] with [SpeechRecognizerBloc]
 class SpeechRecognizerListener extends StatelessWidget {
+  /// constructor
   const SpeechRecognizerListener({
-    required this.listener, required this.child, super.key,
+    required this.listener,
+    required this.child,
+    super.key,
     this.listenWhen,
   });
 
+  /// listener
   final void Function(
     BuildContext context,
     SpeechRecognizerState state,
   ) listener;
+
+  /// listen when
   final bool Function(
     SpeechRecognizerState previous,
     SpeechRecognizerState current,
   )? listenWhen;
+
+  /// child
   final Widget child;
 
   @override
@@ -131,13 +165,19 @@ class SpeechRecognizerListener extends StatelessWidget {
   }
 }
 
-/// run [onListening] on [SpeechRecognizerState.isListening] change
+/// run [onListening] when [SpeechRecognizerState.isListening] change
 class SpeechRecognizerOnStartListening extends StatelessWidget {
+  /// constructor
   const SpeechRecognizerOnStartListening({
-    required this.onListening, required this.child, super.key,
+    required this.onListening,
+    required this.child,
+    super.key,
   });
 
+  /// callback when [SpeechRecognizerState.isListening] change
   final void Function() onListening;
+
+  /// child
   final Widget child;
 
   @override

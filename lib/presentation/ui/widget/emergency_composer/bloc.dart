@@ -3,11 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:safegem/application/application.dart';
 import 'package:safegem/injection.dart';
 
+/// [BlocProvider] + [EmergencyComposerBloc]
 class EmergencyComposerProvider extends StatelessWidget {
+  /// constructor
   const EmergencyComposerProvider({
-    required this.child, super.key,
+    required this.child,
+    super.key,
   });
 
+  /// child
   final Widget child;
 
   @override
@@ -19,14 +23,26 @@ class EmergencyComposerProvider extends StatelessWidget {
   }
 }
 
+/// [BlocConsumer] + [EmergencyComposerBloc]
 class EmergencyComposerConsumer extends StatelessWidget {
+  /// constructor
   const EmergencyComposerConsumer({
-    required this.builder, required this.listener, super.key,
+    required this.builder,
+    required this.listener,
+    super.key,
   });
 
-  final Widget Function(BuildContext context, EmergencyComposerState state)
-      builder;
-  final void Function(BuildContext, EmergencyComposerState) listener;
+  /// builder
+  final Widget Function(
+    BuildContext context,
+    EmergencyComposerState state,
+  ) builder;
+
+  /// listener
+  final void Function(
+    BuildContext,
+    EmergencyComposerState,
+  ) listener;
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +53,21 @@ class EmergencyComposerConsumer extends StatelessWidget {
   }
 }
 
+/// [BlocSelector] + [EmergencyComposerBloc]
 class EmergencyComposerSelector<T> extends StatelessWidget {
+  /// constructor
   const EmergencyComposerSelector({
-    required this.selector, required this.builder, super.key,
+    required this.selector,
+    required this.builder,
+    super.key,
   });
 
-  final T Function(EmergencyComposerState state) selector;
+  /// selector
+  final T Function(
+    EmergencyComposerState state,
+  ) selector;
+
+  /// builder
   final Widget Function(
     BuildContext context,
     T state,
@@ -57,12 +82,19 @@ class EmergencyComposerSelector<T> extends StatelessWidget {
   }
 }
 
+/// [BlocListener] + [EmergencyComposerBloc]
 class EmergencyComposerListener extends StatelessWidget {
+  /// constructor
   const EmergencyComposerListener({
-    required this.listener, required this.child, super.key,
+    required this.listener,
+    required this.child,
+    super.key,
   });
 
+  /// child
   final Widget child;
+
+  /// listener
   final void Function(
     BuildContext context,
     EmergencyComposerState state,

@@ -5,11 +5,13 @@ import 'package:safegem/presentation/ui/theme/app_theme.dart';
 
 /// From [UserSettingsState] compute the app [ThemeData]
 class UserTheme extends StatelessWidget {
+  /// constructor
   const UserTheme({
     required this.builder,
     super.key,
   });
 
+  /// builder with computed [ThemeData]
   final Widget Function(BuildContext context, ThemeData theme) builder;
 
   @override

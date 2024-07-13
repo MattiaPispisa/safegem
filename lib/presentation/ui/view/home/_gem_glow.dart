@@ -20,7 +20,7 @@ class BlocGemGlow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SpeechRecognizerIsListening(
-      builder: (_, isListening) {
+      builder: (_, {required bool isListening}) {
         return GemGlow(
           animated: isListening,
           onTap: () => _onTap(context),

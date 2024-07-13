@@ -4,11 +4,15 @@ import 'package:safegem/application/application.dart';
 import 'package:safegem/domain/domain.dart';
 import 'package:safegem/injection.dart';
 
+/// [BlocProvider] + [SenderBloc]
 class SenderBlocProvider extends StatelessWidget {
+  /// constructor
   const SenderBlocProvider({
-    required this.child, super.key,
+    required this.child,
+    super.key,
   });
 
+  /// child
   final Widget child;
 
   @override
@@ -20,13 +24,26 @@ class SenderBlocProvider extends StatelessWidget {
   }
 }
 
+/// [BlocConsumer] + [SenderBloc]
 class SenderConsumer extends StatelessWidget {
+  /// constructor
   const SenderConsumer({
-    required this.builder, required this.listener, super.key,
+    required this.builder,
+    required this.listener,
+    super.key,
   });
 
-  final Widget Function(BuildContext context, SenderState state) builder;
-  final void Function(BuildContext, SenderState) listener;
+  /// builder
+  final Widget Function(
+    BuildContext context,
+    SenderState state,
+  ) builder;
+
+  /// listener
+  final void Function(
+    BuildContext context,
+    SenderState state,
+  ) listener;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +54,15 @@ class SenderConsumer extends StatelessWidget {
   }
 }
 
+/// [BlocBuilder] + [SenderBloc]
 class SenderBuilder extends StatelessWidget {
+  /// constructor
   const SenderBuilder({
-    required this.builder, super.key,
+    required this.builder,
+    super.key,
   });
 
+  /// builder
   final Widget Function(
     BuildContext context,
     SenderState state,
@@ -55,12 +76,23 @@ class SenderBuilder extends StatelessWidget {
   }
 }
 
+/// [BlocListener] + [SenderBloc]
+///
+/// [onMessage] is called when a different message is sent
+/// (prev [SenderState.emergencyMessage] !=
+/// current [SenderState.emergencyMessage])
 class SenderOnNewMessage extends StatelessWidget {
+  /// constructor
   const SenderOnNewMessage({
-    required this.onMessage, required this.child, super.key,
+    required this.onMessage,
+    required this.child,
+    super.key,
   });
 
+  /// callback on new message sent
   final void Function(EmergencyMessage message) onMessage;
+
+  /// child
   final Widget child;
 
   @override
