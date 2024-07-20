@@ -1,4 +1,5 @@
 import 'package:safegem/application/application.dart';
+import 'package:safegem/domain/domain.dart';
 
 import '../bloc_robot.dart';
 
@@ -18,19 +19,33 @@ class UserSettingsRobot extends BlocRobot<UserSettingsState> {
   UserSettingsCubit bloc;
 
   @override
-  void dispose() {
-    bloc.close();
-  }
-
-  @override
   UserSettingsMatcher get state => UserSettingsMatcher();
 }
 
 class UserSettingsMatcher extends BlocStateRobotMatcher<UserSettingsState> {
-  UserSettingsMatcher havingDark(bool dark) {
+  void havingDark(bool dark) {
     add(
       (state) => state.having((state) => state.darkMode, 'darkMode', dark),
     );
-    return this;
+  }
+
+  void havingColor(AppColor selectedColor) {
+    add(
+      (state) => state.having(
+        (state) => state.selectedColor,
+        'selectedColor',
+        selectedColor,
+      ),
+    );
+  }
+
+  void havingContacts(List<EmergencyContact> emergencyContacts) {
+    add(
+      (state) => state.having(
+        (state) => state.emergencyContacts,
+        'emergencyContacts',
+        emergencyContacts,
+      ),
+    );
   }
 }

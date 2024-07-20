@@ -74,7 +74,10 @@ abstract class BlocRobot<State> {
   BlocStateRobotMatcher<State> get state;
 
   /// dispose
-  void dispose();
+  @mustCallSuper
+  void dispose() {
+    bloc.close();
+  }
 }
 
 typedef BlocStateMatcherFunctions<T> = TypeMatcher<T> Function(
@@ -112,9 +115,10 @@ void robotBlocTest<Robot extends BlocRobot<State>, State>(
   String description, {
   required Robot Function() setUp,
   List<BlocStateRobotMatcher<State>> Function(Robot robot)? expect,
+  void Function(Robot robot)? verify,
   void Function(Robot robot)? act,
   int skip = 0,
-  Duration wait = const Duration(seconds: 2),
+  Duration? wait,
 }) {
   late Robot blocRobot;
 
@@ -126,7 +130,9 @@ void robotBlocTest<Robot extends BlocRobot<State>, State>(
     act: (_) => act?.call(blocRobot),
     tearDown: () => blocRobot.dispose(),
     wait: wait,
-    expect: () =>
-        expect?.call(blocRobot).map((matcher) => matcher.typeMatcher) ?? [],
+    expect: expect != null
+        ? () => expect(blocRobot).map((matcher) => matcher.typeMatcher)
+        : null,
+    verify: verify != null ? (_) => verify(blocRobot) : null,
   );
 }

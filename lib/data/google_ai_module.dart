@@ -13,9 +13,11 @@ class GoogleAI implements AI {
   final GenerativeModel _model;
 
   @override
-  Future<GenerateContentResponse> generateContent(Iterable<Content> prompt) {
+  Future<AIResponse> generateContent(String prompt) async {
     try {
-      return _model.generateContent(prompt);
+      final googleGenerativeResponse =
+          await _model.generateContent([Content.text(prompt)]);
+      return AIResponse(text: googleGenerativeResponse.text);
     } on GenerativeAIException {
       throw AIUnsupportedLocationException();
     } catch (e) {

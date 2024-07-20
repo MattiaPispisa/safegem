@@ -4,10 +4,9 @@ linter:
 
 analyzer:
   errors:
-  
+
     avoid_positional_boolean_parameters: ignore
     sort_pub_dependencies: ignore
-    avoid_returning_this: ignore
 
   exclude:
     - lib/l10n/**

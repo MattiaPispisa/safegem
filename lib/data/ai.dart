@@ -1,13 +1,11 @@
-import 'dart:math' as math;
-
-import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:injectable/injectable.dart';
+import 'package:safegem/domain/domain.dart';
 
 /// Abstraction of an artificial intelligence service:
 // ignore: one_member_abstracts
 abstract interface class AI {
   /// Generates content responding to [prompt].
-  Future<GenerateContentResponse> generateContent(Iterable<Content> prompt);
+  Future<AIResponse> generateContent(String prompt);
 }
 
 /// Base [AI] exception thrown when generating content fails.
@@ -15,6 +13,15 @@ sealed class AIException implements Exception {}
 
 /// An [AIException] thrown when service is not supported in current location
 final class AIUnsupportedLocationException implements AIException {}
+
+/// AI response
+class AIResponse {
+  /// constructor
+  const AIResponse({required this.text});
+
+  /// The text of the best candidate response for the AI.
+  final String? text;
+}
 
 /// A mocked implementation of [AI]
 ///
@@ -27,34 +34,16 @@ class MockAI implements AI {
   const MockAI();
 
   @override
-  Future<GenerateContentResponse> generateContent(
-    Iterable<Content> prompt,
+  Future<AIResponse> generateContent(
+    String prompt,
   ) async {
     try {
       await Future<void>.delayed(const Duration(seconds: 1));
-      return GenerateContentResponse(
-        [
-          Candidate(
-            Content.text('police:112 ${_generateRandomString(10)}'),
-            null,
-            null,
-            null,
-            null,
-          ),
-        ],
-        null,
+      return AIResponse(
+        text: 'police:112 ${StringHelper.generateRandomString(10)}',
       );
     } catch (e) {
       throw AIUnsupportedLocationException();
     }
-  }
-
-  String _generateRandomString(int length) {
-    const chars =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    final random = math.Random();
-
-    return List.generate(length, (index) => chars[random.nextInt(chars.length)])
-        .join();
   }
 }

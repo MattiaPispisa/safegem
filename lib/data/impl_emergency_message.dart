@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:injectable/injectable.dart';
 import 'package:safegem/data/ai.dart';
 import 'package:safegem/domain/domain.dart';
@@ -79,8 +78,7 @@ class ImplEmergencyService implements EmergencyService {
         'Give me the phone number of the most appropriate authority '
         'in the following format: authority name: number, '
         "don't write anything else.";
-    final content = [Content.text(message)];
-    final response = await _ai.generateContent(content);
+    final response = await _ai.generateContent(message);
     final match = _phoneRegExp.firstMatch(response.text!);
     return match![0]!;
   }
@@ -97,8 +95,7 @@ class ImplEmergencyService implements EmergencyService {
         'longitude "${dto.location.longitude}".'
         ' This is happening: "${dto.message.content}". '
         "Don't write anything else besides the translated message.";
-    final content = [Content.text(message)];
-    final response = await _ai.generateContent(content);
+    final response = await _ai.generateContent(message);
     return response.text!;
   }
 
