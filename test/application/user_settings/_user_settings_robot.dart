@@ -1,13 +1,17 @@
+import 'package:en_logger/en_logger.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:safegem/application/application.dart';
 import 'package:safegem/domain/domain.dart';
 
 import '../bloc_robot.dart';
 
+class _MockLogger extends Mock implements EnLogger {}
+
 class UserSettingsRobot extends BlocRobot<UserSettingsState> {
   UserSettingsRobot._(this.bloc);
 
   factory UserSettingsRobot.init() {
-    return UserSettingsRobot._(UserSettingsCubit());
+    return UserSettingsRobot._(UserSettingsCubit(_MockLogger()));
   }
 
   /// setUpAll
