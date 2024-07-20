@@ -1,7 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:en_logger/en_logger.dart';
 import 'package:injectable/injectable.dart';
 import 'package:safegem/data/ai.dart';
 import 'package:safegem/domain/domain.dart';
+
+const _prefix = 'ImplEmergencyService';
 
 // phone reg exp inside text
 final RegExp _phoneRegExp = RegExp(r'\+?\d[\d-. ]*(?:\d)');
@@ -10,14 +13,16 @@ final RegExp _phoneRegExp = RegExp(r'\+?\d[\d-. ]*(?:\d)');
 @LazySingleton(as: EmergencyService)
 class ImplEmergencyService implements EmergencyService {
   /// constructor
-  const ImplEmergencyService(this._ai);
+  const ImplEmergencyService(this._ai, this._logger);
 
   final AI _ai;
+  final EnLogger _logger;
 
   @override
   Future<Either<EmergencyMessageFailure, EmergencyMessage>> getEmergencyMessage(
     GetEmergencyMessageDto dto,
   ) async {
+    _logger.info('getEmergencyMessage');
     String? authorityName;
     String? number;
     String? localizedMessage;
@@ -25,6 +30,10 @@ class ImplEmergencyService implements EmergencyService {
     try {
       localizedMessage = await _localizedMessage(dto);
     } on AIUnsupportedLocationException catch (e) {
+      _logger.error(
+        'on localizedMessage, ai can not be used on this location',
+        prefix: _prefix,
+      );
       return left(EmergencyMessageUnsupportedUserLocation(e.toString()));
     } catch (e) {
       localizedMessage = null;
@@ -33,6 +42,10 @@ class ImplEmergencyService implements EmergencyService {
     try {
       (authorityName, number) = await _mostAppropriatedNumber(dto);
     } on AIUnsupportedLocationException catch (e) {
+      _logger.error(
+        'on mostAppropriateNumber, ai can not be used on this location',
+        prefix: _prefix,
+      );
       return left(EmergencyMessageUnsupportedUserLocation(e.toString()));
     } catch (e) {
       number = null;
@@ -54,6 +67,10 @@ class ImplEmergencyService implements EmergencyService {
       );
     }
 
+    _logger.info(
+      'message composed with number $number, message $localizedMessage',
+      prefix: _prefix,
+    );
     return right(
       EmergencyMessage(
         authorityName: authorityName,
