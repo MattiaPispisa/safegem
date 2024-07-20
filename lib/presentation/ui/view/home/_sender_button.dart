@@ -19,7 +19,10 @@ class SenderButton extends StatelessWidget {
 
   void _onPressed() {
     launchUrl(
-      emergencyMessage.sms,
+      UriHelper.sms(
+        message: emergencyMessage.message,
+        number: emergencyMessage.authorityNumber,
+      ),
     );
   }
 

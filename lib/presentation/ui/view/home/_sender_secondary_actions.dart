@@ -31,7 +31,7 @@ class SenderSecondaryActions extends StatelessWidget {
         text: emergencyMessage.authorityNumber,
         iconColor: Colors.green,
         onPressed: () {
-          launchUrl(emergencyMessage.phone);
+          launchUrl(UriHelper.phone(number: emergencyMessage.authorityNumber));
         },
       ),
       ChipButton(
@@ -39,7 +39,12 @@ class SenderSecondaryActions extends StatelessWidget {
         text: emergencyMessage.authorityNumber,
         iconColor: theme.primaryColor,
         onPressed: () {
-          launchUrl(emergencyMessage.phone);
+          launchUrl(
+            UriHelper.sms(
+              message: emergencyMessage.message,
+              number: emergencyMessage.authorityNumber,
+            ),
+          );
         },
       ),
       ...emergencyContacts.map(

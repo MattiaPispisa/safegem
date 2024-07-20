@@ -18,6 +18,7 @@ class ImplEmergencyService implements EmergencyService {
   Future<Either<EmergencyMessageFailure, EmergencyMessage>> getEmergencyMessage(
     GetEmergencyMessageDto dto,
   ) async {
+    String? authorityName;
     String? number;
     String? localizedMessage;
 
@@ -30,14 +31,14 @@ class ImplEmergencyService implements EmergencyService {
     }
 
     try {
-      number = await _mostAppropriatedNumber(dto);
+      (authorityName, number) = await _mostAppropriatedNumber(dto);
     } on AIUnsupportedLocationException catch (e) {
       return left(EmergencyMessageUnsupportedUserLocation(e.toString()));
     } catch (e) {
       number = null;
     }
 
-    if (number == null) {
+    if (number == null || authorityName == null) {
       return left(
         EmergencyMessageAuthorityNumberNotFound(
           message: localizedMessage ?? '',
@@ -55,20 +56,14 @@ class ImplEmergencyService implements EmergencyService {
 
     return right(
       EmergencyMessage(
+        authorityName: authorityName,
         authorityNumber: number,
         message: localizedMessage,
-        sms: UriHelper.sms(
-          message: localizedMessage,
-          number: number,
-        ),
-        phone: UriHelper.phone(
-          number: number,
-        ),
       ),
     );
   }
 
-  Future<String> _mostAppropriatedNumber(
+  Future<(String, String)> _mostAppropriatedNumber(
     GetEmergencyMessageDto dto,
   ) async {
     final message = 'I am at the following geographic coordinates: '
@@ -77,10 +72,15 @@ class ImplEmergencyService implements EmergencyService {
         'This is happening: "${dto.message.content}". '
         'Give me the phone number of the most appropriate authority '
         'in the following format: authority name: number, '
-        "don't write anything else.";
+        "don't write anything else. "
+        'Use the authority name of the local language '
+        'of the geographic coordinates.';
     final response = await _ai.generateContent(message);
-    final match = _phoneRegExp.firstMatch(response.text!);
-    return match![0]!;
+    final bestCandidateMessage = response.text!;
+
+    final name = bestCandidateMessage.split(':').first;
+    final number = _phoneRegExp.firstMatch(bestCandidateMessage)![0]!;
+    return (name, number);
   }
 
   Future<String> _localizedMessage(

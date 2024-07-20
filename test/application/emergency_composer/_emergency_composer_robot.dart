@@ -36,14 +36,10 @@ class EmergencyComposerRobot extends BlocRobot<EmergencyComposerState> {
     when(() => service.getEmergencyMessage(any())).thenAnswer(
       (_) => Future.value(
         right(
-          EmergencyMessage(
+          const EmergencyMessage(
+            authorityName: 'A mock name',
             message: 'A mock message',
             authorityNumber: '123',
-            sms: UriHelper.sms(
-              message: 'A mock message',
-              number: '123',
-            ),
-            phone: UriHelper.phone(number: '123'),
           ),
         ),
       ),

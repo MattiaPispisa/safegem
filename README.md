@@ -1,4 +1,4 @@
-# safegem
+# Safegem
 
 ## Introduction
 
@@ -57,3 +57,13 @@ The tests follow the robot design pattern to ensure easy readability and high re
 ## The future
 
 Currently, all the call to actions lead to system applications (using `urlLauncher` to open the specific app). It would be interesting to perform operations directly on `Safegem` after the AI generates the response. However, this would require a more in-depth analysis and the writing of native code (the current libraries are outdated), which demands more time than is available.
+
+## Screenshot
+
+|                                                                                                    |                                                                                                      |                                                                                                           |                                                                                                                           |     |
+| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | --- |
+| <div><p>Home page dark</p><img alt="home-dark" src="./screenshot/home_dark.jpg" width="200"></div> | <div><p>Home page light</p><img alt="home-light" src="./screenshot/home_light.jpg" width="200"><div> | <div> <p>Settings dark</p> <img alt="home-light" src="./screenshot/settings_dark.jpg" width="200"> </div> | <div> <p>Settings - new contact</p> <img alt="home-light" src="./screenshot/settings_new_contact.jpg" width="200"> </div> |
+
+|                                                                                                                                              |                                                                                                                           |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| <div><p>Send message</p> <video controls width="250"><source src="./screenshot/send_emergency_message.mp4" type="video/mp4" /></video></div> | <div><p>Settings</p><video controls width="250"><source src="./screenshot/settings.mp4" type="video/mp4" /></video></div> |
