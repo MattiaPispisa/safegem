@@ -127,27 +127,57 @@ class LocationHandlerState extends State<LocationHandler> {
 }
 
 /// observe the last connectivity state of [LocationHandler]
-class LastKnowLocationBuilder extends StatelessWidget {
+class LastKnowLocationBuilder extends StatefulWidget {
   /// constructor
   const LastKnowLocationBuilder({
     required this.builder,
+    this.startAfter = const Duration(seconds: 1),
     super.key,
   });
 
-    /// build a widget using last location
+  /// build a widget using last location
   final Widget Function(
     BuildContext context,
     Location? location,
   ) builder;
 
+  /// Initially, the location will always be unset, so I'll create a fake one
+  /// for a short period (< [startAfter]) to avoid a false negative [builder].
+  final Duration startAfter;
+
+  @override
+  State<LastKnowLocationBuilder> createState() =>
+      _LastKnowLocationBuilderState();
+}
+
+class _LastKnowLocationBuilderState extends State<LastKnowLocationBuilder> {
+  late bool _lookLastKnownLocation;
+
+  @override
+  void initState() {
+    _lookLastKnownLocation = false;
+
+    super.initState();
+
+    Timer(
+      widget.startAfter,
+      () => setState(() {
+        _lookLastKnownLocation = true;
+      }),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (!_lookLastKnownLocation) {
+      return widget.builder(context, const Location(latitude: 0, longitude: 0));
+    }
     final location = LocationHandler.of(context).lastKnowLocation;
 
     return ValueListenableBuilder(
       valueListenable: location,
       builder: (context, value, child) {
-        return builder(context, value);
+        return widget.builder(context, value);
       },
     );
   }
