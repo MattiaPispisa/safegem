@@ -48,4 +48,12 @@ The application is designed in 4 layers: **domain**, **data**, **application**, 
 
 To maintain high code quality, `very_good_analysis` has been included as a linter to ensure 100% API documentation.
 
+## Test
+
+I started creating application tests by setting up some utilities that will definitely be useful for future tests, making them faster to write.
+
+The tests follow the robot design pattern to ensure easy readability and high reusability in future tests.
+
 ## The future
+
+Currently, all the call to actions lead to system applications (using `urlLauncher` to open the specific app). It would be interesting to perform operations directly on `Safegem` after the AI generates the response. However, this would require a more in-depth analysis and the writing of native code (the current libraries are outdated), which demands more time than is available.

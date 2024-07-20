@@ -16,7 +16,7 @@
 
 
     <application
-        android:label="safegem"
+        android:label="Safegem"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
