@@ -119,6 +119,4 @@ native code (the current libraries are outdated), which demands more time than i
 
 ## Video
 
-|                                                                                                                                              |                                                                                                                           |
-|----------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| <div><p>Send message</p> <video controls width="250"><source src="./screenshot/send_emergency_message.mp4" type="video/mp4" /></video></div> | <div><p>Settings</p><video controls width="250"><source src="./screenshot/settings.mp4" type="video/mp4" /></video></div> |
+[App explanation](https://youtu.be/kMTmWL_aaOE)

@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:safegem/domain/domain.dart';
@@ -49,16 +50,31 @@ class SenderSecondaryActions extends StatelessWidget {
       ),
       ...emergencyContacts.map(
         (contact) {
-          return ChipButton(
-            iconData: kIconSend,
-            text: contact.displayName,
-            iconColor: Colors.red,
-            onPressed: () {
-              launchUrl(UriHelper.phone(number: contact.number));
-            },
-          );
+          return [
+            ChipButton(
+              iconData: FontAwesomeIcons.phone,
+              text: contact.displayName,
+              iconColor: Colors.red,
+              onPressed: () {
+                launchUrl(UriHelper.phone(number: contact.number));
+              },
+            ),
+            ChipButton(
+              iconData: kIconSend,
+              text: contact.displayName,
+              iconColor: theme.primaryColor,
+              onPressed: () {
+                launchUrl(
+                  UriHelper.sms(
+                    number: contact.number,
+                    message: emergencyMessage.message,
+                  ),
+                );
+              },
+            ),
+          ];
         },
-      ),
+      ).expand(id),
     ];
 
     final space = SizedBox(
@@ -68,6 +84,7 @@ class SenderSecondaryActions extends StatelessWidget {
     return SizedBox(
       height: _kSecondaryActionHeight,
       child: ListView.separated(
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemCount: buttons.length,
         separatorBuilder: (context, index) {
