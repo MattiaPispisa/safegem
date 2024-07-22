@@ -5,7 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
+import 'app_localizations_fr.dart';
+import 'app_localizations_it.dart';
 
 /// Callers can lookup localized strings with an instance of AppLocalizations
 /// returned by `AppLocalizations.of(context)`.
@@ -88,7 +91,10 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
-    Locale('en')
+    Locale('de'),
+    Locale('en'),
+    Locale('fr'),
+    Locale('it')
   ];
 
   /// No description provided for @to.
@@ -169,6 +175,12 @@ abstract class AppLocalizations {
   /// **'Sorry, but the service for recognizing text from voice is not supported.'**
   String get unsupportedSpeechRecognizer;
 
+  /// No description provided for @speechRecognizerNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, but this device does not support speech to text.'**
+  String get speechRecognizerNotAvailable;
+
   /// No description provided for @name.
   ///
   /// In en, this message translates to:
@@ -233,7 +245,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['de', 'en', 'fr', 'it'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -244,7 +256,10 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'de': return AppLocalizationsDe();
     case 'en': return AppLocalizationsEn();
+    case 'fr': return AppLocalizationsFr();
+    case 'it': return AppLocalizationsIt();
   }
 
   throw FlutterError(

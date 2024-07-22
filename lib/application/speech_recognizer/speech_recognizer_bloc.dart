@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:en_logger/en_logger.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:safegem/domain/domain.dart';
 
 part 'speech_recognizer_event.dart';
+
 part 'speech_recognizer_state.dart';
 
 /// Business logic to recognize speech and convert it in text
@@ -14,8 +16,10 @@ part 'speech_recognizer_state.dart';
 class SpeechRecognizerBloc
     extends Bloc<SpeechRecognizerEvent, SpeechRecognizerState> {
   /// constructor
-  SpeechRecognizerBloc(this._speechRecognizerService)
-      : super(
+  SpeechRecognizerBloc(
+    this._speechRecognizerService,
+    this._logger,
+  ) : super(
           SpeechRecognizerState.initial(
             isAvailable: _speechRecognizerService.available(),
           ),
@@ -27,11 +31,19 @@ class SpeechRecognizerBloc
   }
 
   final SpeechRecognizerService _speechRecognizerService;
+  final EnLogger _logger;
 
   FutureOr<void> _onSpeechStarted(
     SpeechRecognizerStarted event,
     Emitter<SpeechRecognizerState> emit,
-  ) {
+  ) async {
+    if (!state.isAvailable) {
+      _logger.warning(
+        'speech to text is not available, can not start the service',
+      );
+      return;
+    }
+
     if (state.isListening) {
       _speechRecognizerService.stop();
     }

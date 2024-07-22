@@ -1,0 +1,31 @@
+{
+  "@@locale": "it",
+  "to": "a",
+  "settings": "Impostazioni",
+  "theme": "Tema",
+  "dark": "Scuro",
+  "light": "Chiaro",
+  "brightness": "Luminosità",
+  "emergencyContacts": "Contatti di Emergenza",
+  "noConnectivity": "Spiacente, sei offline. Controlla la tua connessione.",
+  "authorityNumberNotFound": "Spiacente, non sono riuscito a trovare il numero di contatto delle autorità locali.",
+  "messageNotRecognized": "Spiacente, non ho capito il messaggio",
+  "locationNotFound": "Spiacente, non riesco a determinare la tua posizione.",
+  "unsupportedLocation": "Spiacente, ma questo servizio non è attualmente disponibile nella tua regione.",
+  "unsupportedSpeechRecognizer": "Spiacente, ma il servizio per il riconoscimento del testo dalla voce non è supportato.",
+  "speechRecognizerNotAvailable": "Spiacente, ma questo dispositivo non supporta il riconoscimento vocale.",
+  "name": "Nome",
+  "insertName": "Inserisci un nome",
+  "phone": "Telefono",
+  "insertValidPhone": "Inserisci un numero di telefono valido",
+  "add": "Aggiungi",
+  "edit": "Modifica",
+  "delete": "Elimina",
+  "emergencyContact": "Contatto di Emergenza",
+  "sureRemoveContact": "Sei sicuro di voler eliminare il contatto di emergenza di {name}?",
+  "@sureRemoveContact": {
+    "placeholders": {
+      "name": {}
+    }
+  }
+}

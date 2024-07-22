@@ -1,0 +1,31 @@
+{
+  "@@locale": "de",
+  "to": "zu",
+  "settings": "Einstellungen",
+  "theme": "Thema",
+  "dark": "Dunkel",
+  "light": "Hell",
+  "brightness": "Helligkeit",
+  "emergencyContacts": "Notfallkontakte",
+  "noConnectivity": "Entschuldigung, Sie sind offline. Bitte überprüfen Sie Ihre Verbindung.",
+  "authorityNumberNotFound": "Entschuldigung, ich konnte die Kontaktnummer der örtlichen Behörden nicht finden.",
+  "messageNotRecognized": "Entschuldigung, ich konnte die Nachricht nicht verstehen",
+  "locationNotFound": "Entschuldigung, ich kann Ihren Standort nicht bestimmen.",
+  "unsupportedLocation": "Entschuldigung, aber dieser Dienst ist derzeit in Ihrer Region nicht verfügbar.",
+  "unsupportedSpeechRecognizer": "Entschuldigung, aber der Dienst zur Erkennung von Text aus Sprache wird nicht unterstützt.",
+  "speechRecognizerNotAvailable": "Entschuldigung, aber dieses Gerät unterstützt keine Spracherkennung.",
+  "name": "Name",
+  "insertName": "Name eingeben",
+  "phone": "Telefon",
+  "insertValidPhone": "Geben Sie eine gültige Telefonnummer ein",
+  "add": "Hinzufügen",
+  "edit": "Bearbeiten",
+  "delete": "Löschen",
+  "emergencyContact": "Notfallkontakt",
+  "sureRemoveContact": "Sind Sie sicher, dass Sie den Notfallkontakt von {name} löschen möchten?",
+  "@sureRemoveContact": {
+    "placeholders": {
+      "name": {}
+    }
+  }
+}

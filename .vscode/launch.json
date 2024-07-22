@@ -9,7 +9,7 @@
       "program": "lib/main.dart",
       "toolArgs": [
         "--dart-define",
-        "GENERATIVE_MODEL_API_KEY=AIzaSyAx862QAh3Z-RIhP4PtKSI1nMcSQUOqyNg",
+        "GENERATIVE_MODEL_API_KEY=XXX",
         "--dart-define",
         "ENVIRONMENT=develop"
       ]

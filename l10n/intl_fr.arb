@@ -1,0 +1,31 @@
+{
+  "@@locale": "fr",
+  "to": "à",
+  "settings": "Paramètres",
+  "theme": "Thème",
+  "dark": "Sombre",
+  "light": "Clair",
+  "brightness": "Luminosité",
+  "emergencyContacts": "Contacts d'urgence",
+  "noConnectivity": "Désolé, vous êtes hors ligne. Veuillez vérifier votre connexion.",
+  "authorityNumberNotFound": "Désolé, je n'ai pas pu trouver le numéro de contact des autorités locales.",
+  "messageNotRecognized": "Désolé, je n'ai pas compris le message",
+  "locationNotFound": "Désolé, je ne parviens pas à déterminer votre position.",
+  "unsupportedLocation": "Désolé, mais ce service n'est actuellement pas disponible dans votre région.",
+  "unsupportedSpeechRecognizer": "Désolé, mais le service de reconnaissance vocale n'est pas pris en charge.",
+  "speechRecognizerNotAvailable": "Désolé, mais cet appareil ne supporte pas la reconnaissance vocale.",
+  "name": "Nom",
+  "insertName": "Insérez le nom",
+  "phone": "Téléphone",
+  "insertValidPhone": "Insérez un numéro de téléphone valide",
+  "add": "Ajouter",
+  "edit": "Modifier",
+  "delete": "Supprimer",
+  "emergencyContact": "Contact d'urgence",
+  "sureRemoveContact": "Êtes-vous sûr de vouloir supprimer le contact d'urgence de {name}?",
+  "@sureRemoveContact": {
+    "placeholders": {
+      "name": {}
+    }
+  }
+}

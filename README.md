@@ -82,6 +82,14 @@ Here, routing is also managed through `getIt`.
 To maintain high code quality, `very_good_analysis` has been included as a linter to ensure 100% API
 documentation.
 
+## Env
+
+The application has two environment variables:
+
+- `ENVIRONMENT`: can be `develop` or `production`, identifies the development environment.
+  In `develop` a mocked ai service is used instead of `google_generative_ai`.
+- `GENERATIVE_MODEL_API_KEY`: the key used to access `google_generative_ai`.
+
 ## Test
 
 I started creating application tests by setting up some utilities that will definitely be useful for

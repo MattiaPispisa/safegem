@@ -44,6 +44,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get unsupportedSpeechRecognizer => 'Sorry, but the service for recognizing text from voice is not supported.';
 
   @override
+  String get speechRecognizerNotAvailable => 'Sorry, but this device does not support speech to text.';
+
+  @override
   String get name => 'Name';
 
   @override

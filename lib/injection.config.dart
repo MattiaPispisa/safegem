@@ -87,8 +87,10 @@ extension GetItInjectableX on _i1.GetIt {
     );
     gh.factory<_i15.UserSettingsCubit>(
         () => _i15.UserSettingsCubit(gh<_i10.EnLogger>()));
-    gh.factory<_i16.SpeechRecognizerBloc>(
-        () => _i16.SpeechRecognizerBloc(gh<_i11.SpeechRecognizerService>()));
+    gh.factory<_i16.SpeechRecognizerBloc>(() => _i16.SpeechRecognizerBloc(
+          gh<_i11.SpeechRecognizerService>(),
+          gh<_i10.EnLogger>(),
+        ));
     return this;
   }
 }

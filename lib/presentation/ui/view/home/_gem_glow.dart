@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,11 +21,13 @@ class BlocGemGlow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SpeechRecognizerIsListening(
-      builder: (_, {required bool isListening}) {
+    return SpeechRecognizerSelector(
+      selector: (state) => (state.isListening, state.isAvailable),
+      builder: (_, state) {
+        final (isListening, isAvailable) = state;
         return GemGlow(
           animated: isListening,
-          onTap: () => _onTap(context),
+          onTap: isAvailable ? () => _onTap(context) : null,
         );
       },
     );
@@ -40,17 +44,20 @@ class GemGlow extends StatelessWidget {
   });
 
   /// on tap callback
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   /// if is to animate
   final bool animated;
+
+  bool get _disabled => onTap == null;
 
   @override
   Widget build(BuildContext context) {
     final theme = context.theme();
 
     return AvatarGlow(
-      glowColor: theme.primaryColor,
+      glowColor:
+          _disabled ? theme.app.colors.neutral.shade300 : theme.primaryColor,
       animate: animated,
       glowRadiusFactor: 0.6,
       child: _gem(context),
@@ -60,7 +67,7 @@ class GemGlow extends StatelessWidget {
   Widget _gem(BuildContext context) {
     final theme = context.theme();
     final size = MediaQuery.sizeOf(context);
-    final sizeSize = size.width / 3;
+    final sizeSize = math.min(size.width, size.height) / 3;
 
     return InkWell(
       borderRadius: BorderRadius.circular(sizeSize / 2),
